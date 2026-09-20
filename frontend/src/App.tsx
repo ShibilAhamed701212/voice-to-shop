@@ -68,7 +68,7 @@ export function App() {
           setLiveTranscript(result.text);
           await handleSendUserMessage(result.text);
         } else {
-          setLiveTranscript('Failed to transcribe audio.');
+          setLiveTranscript(result.text || 'Failed to transcribe audio.');
         }
       }
       setTimeout(() => setLiveTranscript(''), 2000);
@@ -134,8 +134,19 @@ export function App() {
 
       // Vocalize response through Text-to-Speech
       await voiceService.speak(response.text);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Failed to communicate with service agent:', err);
+      // Display the pipeline error directly in the chat feed
+      const errorMessage: Message = {
+        id: `err-${Date.now()}`,
+        sender: 'agent',
+        text: `\u26A0\uFE0F ${err.message}`, // Warning icon
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+      
+      // Fallback vocalization of the error
+      await voiceService.speak("The Make Webhook pipeline is broken. Please check the logs.");
     } finally {
       setIsProcessing(false);
     }

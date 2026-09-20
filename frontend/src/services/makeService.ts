@@ -62,12 +62,7 @@ export class MakeService {
       return data;
     } catch (err: any) {
       console.error('Make Webhook error:', err);
-      return {
-        session_id: this.sessionId,
-        response_type: 'voice',
-        text: "I'm having trouble connecting to the booking server. Please check that the server is running.",
-        error: err.message
-      };
+      throw new Error(`Make Webhook Pipeline Broken: ${err.message}`);
     }
   }
 }

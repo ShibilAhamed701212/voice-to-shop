@@ -109,14 +109,17 @@ export class VoiceService {
       });
 
       if (!response.ok) {
-        throw new Error(`STT API failed: ${response.statusText}`);
+        throw new Error(`Server returned ${response.status}: ${response.statusText}`);
       }
 
       const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message || 'ElevenLabs rejected the audio');
+      }
       return { success: true, text: data.text };
-    } catch (err) {
+    } catch (err: any) {
       console.error('STT Pipeline Error:', err);
-      return { success: false };
+      return { success: false, text: `STT Pipeline Broken: ${err.message}` };
     }
   }
 
