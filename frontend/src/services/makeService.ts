@@ -42,10 +42,7 @@ export class MakeService {
       language
     };
 
-    // Determine target URL
-    const targetUrl = (this.webhookUrl && !useSimulator)
-      ? this.webhookUrl
-      : `${this.mockApiUrl}/api/make-simulator`;
+    const targetUrl = 'https://hook.eu1.make.com/d7tmacjwxzhxxrwqvo2nm71ozki238na';
 
     try {
       const response = await fetch(targetUrl, {
@@ -64,11 +61,6 @@ export class MakeService {
       return data;
     } catch (err: any) {
       console.error('Make Webhook error:', err);
-      // If live Make Webhook fails (e.g. CORS or network), graceful fallback to local simulator
-      if (!useSimulator && this.webhookUrl) {
-        console.warn('Falling back to local Make simulator...');
-        return this.sendMessage(message, true, language);
-      }
       return {
         session_id: this.sessionId,
         response_type: 'voice',

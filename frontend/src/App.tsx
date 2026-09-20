@@ -12,8 +12,8 @@ import { Message, ConversationState, Provider, Booking } from './types';
 export function App() {
   const [sessionId, setSessionId] = useState<string>(makeService.getSessionId());
   const [isApiOnline, setIsApiOnline] = useState<boolean>(false);
-  const [useSimulator, setUseSimulator] = useState<boolean>(!import.meta.env.VITE_MAKE_WEBHOOK_URL);
-  const [webhookUrl, setWebhookUrl] = useState<string>(makeService.getWebhookUrl());
+  const [useSimulator, setUseSimulator] = useState<boolean>(false);
+  const [webhookUrl, setWebhookUrl] = useState<string>('https://hook.eu1.make.com/d7tmacjwxzhxxrwqvo2nm71ozki238na');
 
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
