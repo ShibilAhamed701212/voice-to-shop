@@ -2,27 +2,28 @@ import { MakeWebhookResponse } from '../types';
 
 export class MakeService {
   private sessionId: string;
-  private customerId: string;
   private webhookUrl: string;
-  private mockApiUrl: string;
 
   constructor() {
-    this.sessionId = 'S' + Math.floor(1000 + Math.random() * 9000);
-    this.customerId = 'C001';
+    this.sessionId = this.generateSessionId();
     this.webhookUrl = import.meta.env.VITE_MAKE_WEBHOOK_URL || '';
-    this.mockApiUrl = import.meta.env.VITE_MOCK_API_URL || (import.meta.env.DEV ? 'http://localhost:8000' : '');
+  }
+
+  private generateSessionId(): string {
+    // Basic UUID-like generation for demo
+    return 'sess_' + Math.random().toString(36).substring(2, 9) + Date.now().toString(36);
   }
 
   public getSessionId(): string {
     return this.sessionId;
   }
 
-  public resetSession(): void {
-    this.sessionId = 'S' + Math.floor(1000 + Math.random() * 9000);
-  }
-
   public getWebhookUrl(): string {
     return this.webhookUrl;
+  }
+
+  public resetSession(): void {
+    this.sessionId = this.generateSessionId();
   }
 
   public setWebhookUrl(url: string): void {
@@ -31,12 +32,12 @@ export class MakeService {
 
   public async sendMessage(
     message: string,
-    useSimulator: boolean = false,
+    _useSimulator: boolean = false,
     language: string = 'en-IN'
   ): Promise<MakeWebhookResponse> {
     const payload = {
       session_id: this.sessionId,
-      customer_id: this.customerId,
+      customer_id: 'cust_789',
       message,
       input_type: 'voice',
       language
