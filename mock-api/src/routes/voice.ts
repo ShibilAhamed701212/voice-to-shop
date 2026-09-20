@@ -25,8 +25,13 @@ router.post('/stt', express.raw({ type: '*/*', limit: '50mb' }), async (req, res
     console.log(`[STT Route] Using content-type for blob: ${contentType}`);
     const audioBlob = new Blob([new Uint8Array(audioBuffer)], { type: contentType });
     
+    let ext = 'webm';
+    if (contentType.includes('mp4')) ext = 'mp4';
+    if (contentType.includes('mpeg')) ext = 'mp3';
+    if (contentType.includes('ogg')) ext = 'ogg';
+    
     const formData = new FormData();
-    formData.append('file', audioBlob, 'audio.webm');
+    formData.append('file', audioBlob, `audio.${ext}`);
     formData.append('model_id', 'scribe_v1');
 
     console.log(`[STT Route] Sending to ElevenLabs api...`);

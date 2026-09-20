@@ -21,7 +21,19 @@ export class VoiceService {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       console.log('Microphone permission: granted');
       
-      this.mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+      let mimeType = 'audio/webm';
+      if (typeof MediaRecorder.isTypeSupported === 'function') {
+        if (!MediaRecorder.isTypeSupported(mimeType)) {
+          mimeType = 'audio/mp4';
+          if (!MediaRecorder.isTypeSupported(mimeType)) {
+            mimeType = ''; // Let browser use default
+          }
+        }
+      } else {
+        mimeType = ''; // Safari fallback
+      }
+      
+      this.mediaRecorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
       this.mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           this.audioChunks.push(event.data);
@@ -69,7 +81,8 @@ export class VoiceService {
 
       this.mediaRecorder.onstop = () => {
         console.log('Recorder: stopped');
-        const audioBlob = new Blob(this.audioChunks, { type: 'audio/webm' });
+        const finalMime = this.mediaRecorder?.mimeType || 'audio/webm';
+        const audioBlob = new Blob(this.audioChunks, { type: finalMime });
         console.log(`Audio blob size: ${audioBlob.size} bytes`);
         console.log(`Audio MIME: ${audioBlob.type}`);
         
