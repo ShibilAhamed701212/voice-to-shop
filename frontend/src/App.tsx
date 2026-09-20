@@ -59,21 +59,26 @@ export function App() {
       // Stop Recording
       setIsRecording(false);
       setAnalyserNode(null);
-      await voiceService.stopRecording();
-      if (liveTranscript.trim()) {
-        await handleSendUserMessage(liveTranscript.trim());
+      const audioBlob = await voiceService.stopRecording();
+      
+      if (audioBlob && audioBlob.size > 0) {
+        setLiveTranscript('Transcribing...');
+        const result = await voiceService.sendAudio(audioBlob);
+        if (result.success && result.text) {
+          setLiveTranscript(result.text);
+          await handleSendUserMessage(result.text);
+        } else {
+          setLiveTranscript('Failed to transcribe audio.');
+        }
       }
-      setLiveTranscript('');
+      setTimeout(() => setLiveTranscript(''), 2000);
     } else {
       // Start Recording
       try {
-        setLiveTranscript('');
+        setLiveTranscript('Listening...');
         await voiceService.startRecording(
-          (transcript, isFinal) => {
-            setLiveTranscript(transcript);
-            if (isFinal) {
-              handleToggleRecord();
-            }
+          () => {
+            // No longer used for real-time STT
           },
           (analyser) => {
             setAnalyserNode(analyser);
@@ -81,7 +86,7 @@ export function App() {
         );
         setIsRecording(true);
       } catch (err) {
-        alert('Microphone access was denied or is unavailable. You can also click the quick prompt buttons or type.');
+        // Error is handled inside voiceService
       }
     }
   };

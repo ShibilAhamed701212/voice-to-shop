@@ -8,6 +8,7 @@ import providersRouter from './routes/providers.js';
 import bookingsRouter from './routes/bookings.js';
 import customersRouter from './routes/customers.js';
 import simulatorRouter from './routes/simulator.js';
+import voiceRouter from './routes/voice.js';
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ app.use('/api/providers', providersRouter);
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/customers', customersRouter);
 app.use('/api', simulatorRouter);
+app.use('/api/voice', voiceRouter);
 
 // Static frontend serving if dist exists
 const frontendCandidates = [

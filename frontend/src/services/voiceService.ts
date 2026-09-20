@@ -1,30 +1,17 @@
 export class VoiceService {
   private mediaRecorder: MediaRecorder | null = null;
   private audioChunks: Blob[] = [];
-  private recognition: any = null;
   private isRecording: boolean = false;
   private audioContext: AudioContext | null = null;
   private analyser: AnalyserNode | null = null;
   private microphone: MediaStreamAudioSourceNode | null = null;
-  private elevenLabsApiKey: string = import.meta.env.VITE_ELEVENLABS_API_KEY || '';
-  private elevenLabsVoiceId: string = import.meta.env.VITE_ELEVENLABS_VOICE_ID || '21m00Tcm4TlvDq8ikWAM';
 
   constructor() {
-    this.initSpeechRecognition();
-  }
-
-  private initSpeechRecognition() {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (SpeechRecognition) {
-      this.recognition = new SpeechRecognition();
-      this.recognition.continuous = false;
-      this.recognition.interimResults = true;
-      this.recognition.lang = 'en-IN';
-    }
+    // No longer using window.SpeechRecognition
   }
 
   public async startRecording(
-    onTranscript: (transcript: string, isFinal: boolean) => void,
+    _onTranscript: (transcript: string, isFinal: boolean) => void,
     onAudioData?: (analyser: AnalyserNode) => void
   ): Promise<void> {
     if (this.isRecording) return;
@@ -32,13 +19,17 @@ export class VoiceService {
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      this.mediaRecorder = new MediaRecorder(stream);
+      console.log('Microphone permission: granted');
+      
+      this.mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
       this.mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           this.audioChunks.push(event.data);
         }
       };
-      this.mediaRecorder.start();
+      
+      this.mediaRecorder.start(200); // collect chunks every 200ms
+      console.log('Recorder: started');
       this.isRecording = true;
 
       // Setup audio analyzer for waveform visualizer
@@ -50,37 +41,15 @@ export class VoiceService {
         this.microphone.connect(this.analyser);
         onAudioData(this.analyser);
       }
-
-      // Start Browser STT
-      if (this.recognition) {
-        this.recognition.onresult = (event: any) => {
-          let interimTranscript = '';
-          let finalTranscript = '';
-
-          for (let i = event.resultIndex; i < event.results.length; ++i) {
-            if (event.results[i].isFinal) {
-              finalTranscript += event.results[i][0].transcript;
-            } else {
-              interimTranscript += event.results[i][0].transcript;
-            }
-          }
-
-          if (finalTranscript) {
-            onTranscript(finalTranscript, true);
-          } else if (interimTranscript) {
-            onTranscript(interimTranscript, false);
-          }
-        };
-
-        this.recognition.onerror = (err: any) => {
-          console.warn('Speech recognition status:', err.error);
-        };
-
-        this.recognition.start();
-      }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error starting audio recording:', err);
-      throw err;
+      let errorMsg = 'Microphone permission is required.';
+      if (err.name === 'NotAllowedError') errorMsg = 'Microphone access was denied. Please allow it in your browser settings.';
+      if (err.name === 'NotFoundError') errorMsg = 'No microphone device was found.';
+      if (err.name === 'NotReadableError') errorMsg = 'Microphone is already in use by another application.';
+      if (err.name === 'SecurityError') errorMsg = 'Security error: microphone access is blocked.';
+      alert(errorMsg);
+      throw new Error(errorMsg);
     }
   }
 
@@ -94,20 +63,16 @@ export class VoiceService {
 
       this.isRecording = false;
 
-      if (this.recognition) {
-        try {
-          this.recognition.stop();
-        } catch {
-          // ignore already stopped
-        }
-      }
-
       if (this.audioContext && this.audioContext.state !== 'closed') {
         this.audioContext.close();
       }
 
       this.mediaRecorder.onstop = () => {
+        console.log('Recorder: stopped');
         const audioBlob = new Blob(this.audioChunks, { type: 'audio/webm' });
+        console.log(`Audio blob size: ${audioBlob.size} bytes`);
+        console.log(`Audio MIME: ${audioBlob.type}`);
+        
         // Stop all audio tracks to release microphone
         this.mediaRecorder?.stream.getTracks().forEach(track => track.stop());
         resolve(audioBlob);
@@ -117,9 +82,29 @@ export class VoiceService {
     });
   }
 
-  public async sendAudio(_audioBlob: Blob): Promise<{ success: boolean; url?: string }> {
-    // Modular audio dispatch (e.g. for archiving or upstream STT)
-    return { success: true };
+  public async sendAudio(audioBlob: Blob): Promise<{ success: boolean; text?: string }> {
+    try {
+      const BASE_URL = import.meta.env.VITE_API_URL || '';
+      const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY || '';
+      const response = await fetch(`${BASE_URL}/api/voice/stt`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': audioBlob.type,
+          'x-api-key': apiKey
+        },
+        body: audioBlob
+      });
+
+      if (!response.ok) {
+        throw new Error(`STT API failed: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return { success: true, text: data.text };
+    } catch (err) {
+      console.error('STT Pipeline Error:', err);
+      return { success: false };
+    }
   }
 
   /**
@@ -128,35 +113,38 @@ export class VoiceService {
   public async speak(text: string): Promise<void> {
     if (!text) return;
 
-    // Optional: ElevenLabs TTS if key is present
-    if (this.elevenLabsApiKey) {
-      try {
-        const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${this.elevenLabsVoiceId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'xi-api-key': this.elevenLabsApiKey
-          },
-          body: JSON.stringify({
-            text,
-            model_id: 'eleven_multilingual_v2',
-            voice_settings: {
-              stability: 0.5,
-              similarity_boost: 0.75
-            }
-          })
-        });
+    // Call backend proxy for TTS
+    try {
+      const BASE_URL = import.meta.env.VITE_API_URL || '';
+      const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY || '';
+      const response = await fetch(`${BASE_URL}/api/voice/tts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey
+        },
+        body: JSON.stringify({ text })
+      });
 
-        if (response.ok) {
+      if (response.ok) {
+        // Check if the server fell back to browser TTS
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const json = await response.json();
+          if (json.fallback) {
+             console.log('Backend signaled to fallback to browser TTS:', json.message);
+          }
+        } else {
+          // Play the audio
           const audioBlob = await response.blob();
           const audioUrl = URL.createObjectURL(audioBlob);
           const audio = new Audio(audioUrl);
           await audio.play();
           return;
         }
-      } catch (err) {
-        console.warn('ElevenLabs TTS failed, falling back to Web Speech API:', err);
       }
+    } catch (err) {
+      console.warn('Backend TTS failed, falling back to Web Speech API:', err);
     }
 
     // Default Browser SpeechSynthesis (Reliable, Zero latency, Zero cost)
