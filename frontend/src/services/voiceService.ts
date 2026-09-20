@@ -85,7 +85,7 @@ export class VoiceService {
   public async sendAudio(audioBlob: Blob): Promise<{ success: boolean; text?: string }> {
     try {
       const BASE_URL = import.meta.env.VITE_API_URL || '';
-      const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY || '';
+      const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY || 'sk_e678904ac9f2dd3ebe854c17a1c4cf8309891f77ae251b58';
       const response = await fetch(`${BASE_URL}/api/voice/stt`, {
         method: 'POST',
         headers: {
@@ -116,7 +116,7 @@ export class VoiceService {
     // Call backend proxy for TTS
     try {
       const BASE_URL = import.meta.env.VITE_API_URL || '';
-      const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY || '';
+      const apiKey = import.meta.env.VITE_ELEVENLABS_API_KEY || 'sk_e678904ac9f2dd3ebe854c17a1c4cf8309891f77ae251b58';
       const response = await fetch(`${BASE_URL}/api/voice/tts`, {
         method: 'POST',
         headers: {
