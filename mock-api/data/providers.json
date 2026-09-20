@@ -1,0 +1,2896 @@
+[
+  {
+    "provider_id": "AC001",
+    "name": "Rahul Kumar",
+    "category": "AC Repair",
+    "location": {
+      "pincode": "560064",
+      "area": "Yelahanka",
+      "city": "Bengaluru"
+    },
+    "rating": 4.7,
+    "review_count": 128,
+    "experience_years": 6,
+    "price": 399,
+    "currency": "INR",
+    "eta_minutes": 25,
+    "phone": "+919876543210",
+    "services": [
+      "AC Repair",
+      "AC Not Cooling",
+      "AC Maintenance",
+      "AC Gas Refill"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "AC002",
+    "name": "Arun Services",
+    "category": "AC Repair",
+    "location": {
+      "pincode": "560064",
+      "area": "Yelahanka",
+      "city": "Bengaluru"
+    },
+    "rating": 4.5,
+    "review_count": 94,
+    "experience_years": 4,
+    "price": 349,
+    "currency": "INR",
+    "eta_minutes": 35,
+    "phone": "+919876543211",
+    "services": [
+      "AC Repair",
+      "AC Not Cooling",
+      "AC Installation"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "20:00",
+        "end": "21:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "14:00",
+        "end": "15:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "AC003",
+    "name": "CoolBreeze Air Care",
+    "category": "AC Repair",
+    "location": {
+      "pincode": "560064",
+      "area": "Yelahanka",
+      "city": "Bengaluru"
+    },
+    "rating": 4.8,
+    "review_count": 210,
+    "experience_years": 8,
+    "price": 499,
+    "currency": "INR",
+    "eta_minutes": 20,
+    "phone": "+919876543212",
+    "services": [
+      "AC Repair",
+      "AC Not Cooling",
+      "AC Maintenance",
+      "Duct Cleaning"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:30",
+        "end": "20:30",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "AC004",
+    "name": "Venkatesh Rao",
+    "category": "AC Repair",
+    "location": {
+      "pincode": "560085",
+      "area": "Banashankari",
+      "city": "Bengaluru"
+    },
+    "rating": 4.7,
+    "review_count": 133,
+    "experience_years": 6,
+    "price": 399,
+    "currency": "INR",
+    "eta_minutes": 30,
+    "phone": "+919810005428",
+    "services": [
+      "AC Repair",
+      "AC Not Cooling",
+      "AC Gas Refill",
+      "AC Maintenance",
+      "AC Installation"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "AC005",
+    "name": "Praveen Cooling Solutions",
+    "category": "AC Repair",
+    "location": {
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
+      "city": "Bengaluru"
+    },
+    "rating": 4.6,
+    "review_count": 164,
+    "experience_years": 7,
+    "price": 419,
+    "currency": "INR",
+    "eta_minutes": 35,
+    "phone": "+919810006785",
+    "services": [
+      "AC Repair",
+      "AC Not Cooling",
+      "AC Gas Refill",
+      "AC Maintenance",
+      "AC Installation"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "AC006",
+    "name": "Sunil Kumar AC",
+    "category": "AC Repair",
+    "location": {
+      "pincode": "560076",
+      "area": "BTM Layout",
+      "city": "Bengaluru"
+    },
+    "rating": 4.5,
+    "review_count": 195,
+    "experience_years": 8,
+    "price": 499,
+    "currency": "INR",
+    "eta_minutes": 40,
+    "phone": "+919810008142",
+    "services": [
+      "AC Repair",
+      "AC Not Cooling",
+      "AC Gas Refill",
+      "AC Maintenance",
+      "AC Installation"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "PL007",
+    "name": "Ramesh Waterworks",
+    "category": "Plumbing",
+    "location": {
+      "pincode": "560085",
+      "area": "Banashankari",
+      "city": "Bengaluru"
+    },
+    "rating": 4.2,
+    "review_count": 40,
+    "experience_years": 3,
+    "price": 269,
+    "currency": "INR",
+    "eta_minutes": 15,
+    "phone": "+919810009499",
+    "services": [
+      "Plumbing",
+      "Kitchen Tap Leak",
+      "Pipe Replacement",
+      "Bathroom Fitting",
+      "Drain Cleaning"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "PL008",
+    "name": "Manjunath Plumbers",
+    "category": "Plumbing",
+    "location": {
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
+      "city": "Bengaluru"
+    },
+    "rating": 4.9,
+    "review_count": 71,
+    "experience_years": 4,
+    "price": 349,
+    "currency": "INR",
+    "eta_minutes": 20,
+    "phone": "+919810010856",
+    "services": [
+      "Plumbing",
+      "Kitchen Tap Leak",
+      "Pipe Replacement",
+      "Bathroom Fitting",
+      "Drain Cleaning"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "PL009",
+    "name": "Suresh Quick Fix",
+    "category": "Plumbing",
+    "location": {
+      "pincode": "560076",
+      "area": "BTM Layout",
+      "city": "Bengaluru"
+    },
+    "rating": 4.8,
+    "review_count": 102,
+    "experience_years": 5,
+    "price": 369,
+    "currency": "INR",
+    "eta_minutes": 25,
+    "phone": "+919810012213",
+    "services": [
+      "Plumbing",
+      "Kitchen Tap Leak",
+      "Pipe Replacement",
+      "Bathroom Fitting",
+      "Drain Cleaning"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "PL010",
+    "name": "Shiva Pipe Works",
+    "category": "Plumbing",
+    "location": {
+      "pincode": "560100",
+      "area": "Electronic City",
+      "city": "Bengaluru"
+    },
+    "rating": 4.7,
+    "review_count": 133,
+    "experience_years": 6,
+    "price": 299,
+    "currency": "INR",
+    "eta_minutes": 30,
+    "phone": "+919810013570",
+    "services": [
+      "Plumbing",
+      "Kitchen Tap Leak",
+      "Pipe Replacement",
+      "Bathroom Fitting",
+      "Drain Cleaning"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "PL011",
+    "name": "Kiran Plumbing Hub",
+    "category": "Plumbing",
+    "location": {
+      "pincode": "560085",
+      "area": "Banashankari",
+      "city": "Bengaluru"
+    },
+    "rating": 4.6,
+    "review_count": 164,
+    "experience_years": 7,
+    "price": 319,
+    "currency": "INR",
+    "eta_minutes": 35,
+    "phone": "+919810014927",
+    "services": [
+      "Plumbing",
+      "Kitchen Tap Leak",
+      "Pipe Replacement",
+      "Bathroom Fitting",
+      "Drain Cleaning"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "EL012",
+    "name": "Vinay Electrician",
+    "category": "Electrical",
+    "location": {
+      "pincode": "560066",
+      "area": "Whitefield",
+      "city": "Bengaluru"
+    },
+    "rating": 4.2,
+    "review_count": 40,
+    "experience_years": 3,
+    "price": 319,
+    "currency": "INR",
+    "eta_minutes": 15,
+    "phone": "+919810016284",
+    "services": [
+      "Electrical Repair",
+      "Short Circuit Fix",
+      "Fan Repair & Installation",
+      "Switchboard Replacement",
+      "Inverter Wiring"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "EL013",
+    "name": "Anand Wireman Services",
+    "category": "Electrical",
+    "location": {
+      "pincode": "560037",
+      "area": "Marathahalli",
+      "city": "Bengaluru"
+    },
+    "rating": 4.9,
+    "review_count": 71,
+    "experience_years": 4,
+    "price": 399,
+    "currency": "INR",
+    "eta_minutes": 20,
+    "phone": "+919810017641",
+    "services": [
+      "Electrical Repair",
+      "Short Circuit Fix",
+      "Fan Repair & Installation",
+      "Switchboard Replacement",
+      "Inverter Wiring"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "EL014",
+    "name": "Ganesh PowerCare",
+    "category": "Electrical",
+    "location": {
+      "pincode": "560064",
+      "area": "Yelahanka",
+      "city": "Bengaluru"
+    },
+    "rating": 4.8,
+    "review_count": 102,
+    "experience_years": 5,
+    "price": 419,
+    "currency": "INR",
+    "eta_minutes": 25,
+    "phone": "+919810018998",
+    "services": [
+      "Electrical Repair",
+      "Short Circuit Fix",
+      "Fan Repair & Installation",
+      "Switchboard Replacement",
+      "Inverter Wiring"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "EL015",
+    "name": "Vijay ElectroFix",
+    "category": "Electrical",
+    "location": {
+      "pincode": "560034",
+      "area": "Koramangala",
+      "city": "Bengaluru"
+    },
+    "rating": 4.7,
+    "review_count": 133,
+    "experience_years": 6,
+    "price": 349,
+    "currency": "INR",
+    "eta_minutes": 30,
+    "phone": "+919810020355",
+    "services": [
+      "Electrical Repair",
+      "Short Circuit Fix",
+      "Fan Repair & Installation",
+      "Switchboard Replacement",
+      "Inverter Wiring"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "EL016",
+    "name": "Deepak Sparks",
+    "category": "Electrical",
+    "location": {
+      "pincode": "560066",
+      "area": "Whitefield",
+      "city": "Bengaluru"
+    },
+    "rating": 4.6,
+    "review_count": 164,
+    "experience_years": 7,
+    "price": 369,
+    "currency": "INR",
+    "eta_minutes": 35,
+    "phone": "+919810021712",
+    "services": [
+      "Electrical Repair",
+      "Short Circuit Fix",
+      "Fan Repair & Installation",
+      "Switchboard Replacement",
+      "Inverter Wiring"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "CL017",
+    "name": "SparkleClean Services",
+    "category": "Cleaning",
+    "location": {
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
+      "city": "Bengaluru"
+    },
+    "rating": 4.2,
+    "review_count": 40,
+    "experience_years": 3,
+    "price": 869,
+    "currency": "INR",
+    "eta_minutes": 15,
+    "phone": "+919810023069",
+    "services": [
+      "Deep Home Cleaning",
+      "Kitchen Deep Clean",
+      "Bathroom Sanitization",
+      "Sofa Shampooing",
+      "Full House Clean"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "CL018",
+    "name": "Swachh Home Care",
+    "category": "Cleaning",
+    "location": {
+      "pincode": "560076",
+      "area": "BTM Layout",
+      "city": "Bengaluru"
+    },
+    "rating": 4.9,
+    "review_count": 71,
+    "experience_years": 4,
+    "price": 949,
+    "currency": "INR",
+    "eta_minutes": 20,
+    "phone": "+919810024426",
+    "services": [
+      "Deep Home Cleaning",
+      "Kitchen Deep Clean",
+      "Bathroom Sanitization",
+      "Sofa Shampooing",
+      "Full House Clean"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "CL019",
+    "name": "Pooja Cleaning Express",
+    "category": "Cleaning",
+    "location": {
+      "pincode": "560100",
+      "area": "Electronic City",
+      "city": "Bengaluru"
+    },
+    "rating": 4.8,
+    "review_count": 102,
+    "experience_years": 5,
+    "price": 969,
+    "currency": "INR",
+    "eta_minutes": 25,
+    "phone": "+919810025783",
+    "services": [
+      "Deep Home Cleaning",
+      "Kitchen Deep Clean",
+      "Bathroom Sanitization",
+      "Sofa Shampooing",
+      "Full House Clean"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "CL020",
+    "name": "Urban Sparkle Co.",
+    "category": "Cleaning",
+    "location": {
+      "pincode": "560085",
+      "area": "Banashankari",
+      "city": "Bengaluru"
+    },
+    "rating": 4.7,
+    "review_count": 133,
+    "experience_years": 6,
+    "price": 899,
+    "currency": "INR",
+    "eta_minutes": 30,
+    "phone": "+919810027140",
+    "services": [
+      "Deep Home Cleaning",
+      "Kitchen Deep Clean",
+      "Bathroom Sanitization",
+      "Sofa Shampooing",
+      "Full House Clean"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "CL021",
+    "name": "CleanEase Squad",
+    "category": "Cleaning",
+    "location": {
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
+      "city": "Bengaluru"
+    },
+    "rating": 4.6,
+    "review_count": 164,
+    "experience_years": 7,
+    "price": 919,
+    "currency": "INR",
+    "eta_minutes": 35,
+    "phone": "+919810028497",
+    "services": [
+      "Deep Home Cleaning",
+      "Kitchen Deep Clean",
+      "Bathroom Sanitization",
+      "Sofa Shampooing",
+      "Full House Clean"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "WM022",
+    "name": "Naveen Appliance Care",
+    "category": "Washing Machine Repair",
+    "location": {
+      "pincode": "560037",
+      "area": "Marathahalli",
+      "city": "Bengaluru"
+    },
+    "rating": 4.2,
+    "review_count": 40,
+    "experience_years": 3,
+    "price": 419,
+    "currency": "INR",
+    "eta_minutes": 15,
+    "phone": "+919810029854",
+    "services": [
+      "Washing Machine Repair",
+      "Drum Not Spinning",
+      "Drainage Blockage",
+      "Motor Repair",
+      "PCB Board Repair"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "WM023",
+    "name": "Santosh Machine Fix",
+    "category": "Washing Machine Repair",
+    "location": {
+      "pincode": "560064",
+      "area": "Yelahanka",
+      "city": "Bengaluru"
+    },
+    "rating": 4.9,
+    "review_count": 71,
+    "experience_years": 4,
+    "price": 499,
+    "currency": "INR",
+    "eta_minutes": 20,
+    "phone": "+919810031211",
+    "services": [
+      "Washing Machine Repair",
+      "Drum Not Spinning",
+      "Drainage Blockage",
+      "Motor Repair",
+      "PCB Board Repair"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "WM024",
+    "name": "Rapid Spin Solutions",
+    "category": "Washing Machine Repair",
+    "location": {
+      "pincode": "560034",
+      "area": "Koramangala",
+      "city": "Bengaluru"
+    },
+    "rating": 4.8,
+    "review_count": 102,
+    "experience_years": 5,
+    "price": 519,
+    "currency": "INR",
+    "eta_minutes": 25,
+    "phone": "+919810032568",
+    "services": [
+      "Washing Machine Repair",
+      "Drum Not Spinning",
+      "Drainage Blockage",
+      "Motor Repair",
+      "PCB Board Repair"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "WM025",
+    "name": "Amit Washer Tech",
+    "category": "Washing Machine Repair",
+    "location": {
+      "pincode": "560066",
+      "area": "Whitefield",
+      "city": "Bengaluru"
+    },
+    "rating": 4.7,
+    "review_count": 133,
+    "experience_years": 6,
+    "price": 449,
+    "currency": "INR",
+    "eta_minutes": 30,
+    "phone": "+919810033925",
+    "services": [
+      "Washing Machine Repair",
+      "Drum Not Spinning",
+      "Drainage Blockage",
+      "Motor Repair",
+      "PCB Board Repair"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "WM026",
+    "name": "Bharath Appliances",
+    "category": "Washing Machine Repair",
+    "location": {
+      "pincode": "560037",
+      "area": "Marathahalli",
+      "city": "Bengaluru"
+    },
+    "rating": 4.6,
+    "review_count": 164,
+    "experience_years": 7,
+    "price": 469,
+    "currency": "INR",
+    "eta_minutes": 35,
+    "phone": "+919810035282",
+    "services": [
+      "Washing Machine Repair",
+      "Drum Not Spinning",
+      "Drainage Blockage",
+      "Motor Repair",
+      "PCB Board Repair"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "RF027",
+    "name": "ChilZone Cooling Experts",
+    "category": "Refrigerator Repair",
+    "location": {
+      "pincode": "560076",
+      "area": "BTM Layout",
+      "city": "Bengaluru"
+    },
+    "rating": 4.2,
+    "review_count": 40,
+    "experience_years": 3,
+    "price": 469,
+    "currency": "INR",
+    "eta_minutes": 15,
+    "phone": "+919810036639",
+    "services": [
+      "Refrigerator Repair",
+      "Fridge Not Cooling",
+      "Compressor Replacement",
+      "Thermostat Fix",
+      "Gas Leakage"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "RF028",
+    "name": "Sandeep Fridge Care",
+    "category": "Refrigerator Repair",
+    "location": {
+      "pincode": "560100",
+      "area": "Electronic City",
+      "city": "Bengaluru"
+    },
+    "rating": 4.9,
+    "review_count": 71,
+    "experience_years": 4,
+    "price": 549,
+    "currency": "INR",
+    "eta_minutes": 20,
+    "phone": "+919810037996",
+    "services": [
+      "Refrigerator Repair",
+      "Fridge Not Cooling",
+      "Compressor Replacement",
+      "Thermostat Fix",
+      "Gas Leakage"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "RF029",
+    "name": "FrostFree Refrigeration",
+    "category": "Refrigerator Repair",
+    "location": {
+      "pincode": "560085",
+      "area": "Banashankari",
+      "city": "Bengaluru"
+    },
+    "rating": 4.8,
+    "review_count": 102,
+    "experience_years": 5,
+    "price": 569,
+    "currency": "INR",
+    "eta_minutes": 25,
+    "phone": "+919810039353",
+    "services": [
+      "Refrigerator Repair",
+      "Fridge Not Cooling",
+      "Compressor Replacement",
+      "Thermostat Fix",
+      "Gas Leakage"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "RF030",
+    "name": "Imran Cooling Works",
+    "category": "Refrigerator Repair",
+    "location": {
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
+      "city": "Bengaluru"
+    },
+    "rating": 4.7,
+    "review_count": 133,
+    "experience_years": 6,
+    "price": 499,
+    "currency": "INR",
+    "eta_minutes": 30,
+    "phone": "+919810040710",
+    "services": [
+      "Refrigerator Repair",
+      "Fridge Not Cooling",
+      "Compressor Replacement",
+      "Thermostat Fix",
+      "Gas Leakage"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "RF031",
+    "name": "Karthik Cold Line",
+    "category": "Refrigerator Repair",
+    "location": {
+      "pincode": "560076",
+      "area": "BTM Layout",
+      "city": "Bengaluru"
+    },
+    "rating": 4.6,
+    "review_count": 164,
+    "experience_years": 7,
+    "price": 519,
+    "currency": "INR",
+    "eta_minutes": 35,
+    "phone": "+919810042067",
+    "services": [
+      "Refrigerator Repair",
+      "Fridge Not Cooling",
+      "Compressor Replacement",
+      "Thermostat Fix",
+      "Gas Leakage"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "TV032",
+    "name": "VisionTech TV Repair",
+    "category": "TV Repair",
+    "location": {
+      "pincode": "560064",
+      "area": "Yelahanka",
+      "city": "Bengaluru"
+    },
+    "rating": 4.2,
+    "review_count": 40,
+    "experience_years": 3,
+    "price": 569,
+    "currency": "INR",
+    "eta_minutes": 15,
+    "phone": "+919810043424",
+    "services": [
+      "TV Repair",
+      "LED Screen Blank",
+      "Audio Distortion Fix",
+      "Wall Mount Setup",
+      "Motherboard Repair"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "TV033",
+    "name": "Lokesh Screen Works",
+    "category": "TV Repair",
+    "location": {
+      "pincode": "560034",
+      "area": "Koramangala",
+      "city": "Bengaluru"
+    },
+    "rating": 4.9,
+    "review_count": 71,
+    "experience_years": 4,
+    "price": 649,
+    "currency": "INR",
+    "eta_minutes": 20,
+    "phone": "+919810044781",
+    "services": [
+      "TV Repair",
+      "LED Screen Blank",
+      "Audio Distortion Fix",
+      "Wall Mount Setup",
+      "Motherboard Repair"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "TV034",
+    "name": "BrightView Electronics",
+    "category": "TV Repair",
+    "location": {
+      "pincode": "560066",
+      "area": "Whitefield",
+      "city": "Bengaluru"
+    },
+    "rating": 4.8,
+    "review_count": 102,
+    "experience_years": 5,
+    "price": 669,
+    "currency": "INR",
+    "eta_minutes": 25,
+    "phone": "+919810046138",
+    "services": [
+      "TV Repair",
+      "LED Screen Blank",
+      "Audio Distortion Fix",
+      "Wall Mount Setup",
+      "Motherboard Repair"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "TV035",
+    "name": "Sanjay AudioVideo Tech",
+    "category": "TV Repair",
+    "location": {
+      "pincode": "560037",
+      "area": "Marathahalli",
+      "city": "Bengaluru"
+    },
+    "rating": 4.7,
+    "review_count": 133,
+    "experience_years": 6,
+    "price": 599,
+    "currency": "INR",
+    "eta_minutes": 30,
+    "phone": "+919810047495",
+    "services": [
+      "TV Repair",
+      "LED Screen Blank",
+      "Audio Distortion Fix",
+      "Wall Mount Setup",
+      "Motherboard Repair"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "TV036",
+    "name": "Metro Display Hub",
+    "category": "TV Repair",
+    "location": {
+      "pincode": "560064",
+      "area": "Yelahanka",
+      "city": "Bengaluru"
+    },
+    "rating": 4.6,
+    "review_count": 164,
+    "experience_years": 7,
+    "price": 619,
+    "currency": "INR",
+    "eta_minutes": 35,
+    "phone": "+919810048852",
+    "services": [
+      "TV Repair",
+      "LED Screen Blank",
+      "Audio Distortion Fix",
+      "Wall Mount Setup",
+      "Motherboard Repair"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "CP037",
+    "name": "WoodCraft Carpentry",
+    "category": "Carpentry",
+    "location": {
+      "pincode": "560100",
+      "area": "Electronic City",
+      "city": "Bengaluru"
+    },
+    "rating": 4.2,
+    "review_count": 40,
+    "experience_years": 3,
+    "price": 369,
+    "currency": "INR",
+    "eta_minutes": 15,
+    "phone": "+919810050209",
+    "services": [
+      "Carpentry",
+      "Door Lock Installation",
+      "Furniture Assembly",
+      "Cabinet Hinge Repair",
+      "Custom Shelving"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "CP038",
+    "name": "Basavaraj Woodworks",
+    "category": "Carpentry",
+    "location": {
+      "pincode": "560085",
+      "area": "Banashankari",
+      "city": "Bengaluru"
+    },
+    "rating": 4.9,
+    "review_count": 71,
+    "experience_years": 4,
+    "price": 449,
+    "currency": "INR",
+    "eta_minutes": 20,
+    "phone": "+919810051566",
+    "services": [
+      "Carpentry",
+      "Door Lock Installation",
+      "Furniture Assembly",
+      "Cabinet Hinge Repair",
+      "Custom Shelving"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "CP039",
+    "name": "Craftsman Raju",
+    "category": "Carpentry",
+    "location": {
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
+      "city": "Bengaluru"
+    },
+    "rating": 4.8,
+    "review_count": 102,
+    "experience_years": 5,
+    "price": 469,
+    "currency": "INR",
+    "eta_minutes": 25,
+    "phone": "+919810052923",
+    "services": [
+      "Carpentry",
+      "Door Lock Installation",
+      "Furniture Assembly",
+      "Cabinet Hinge Repair",
+      "Custom Shelving"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "CP040",
+    "name": "Nagaraj Furniture Fix",
+    "category": "Carpentry",
+    "location": {
+      "pincode": "560076",
+      "area": "BTM Layout",
+      "city": "Bengaluru"
+    },
+    "rating": 4.7,
+    "review_count": 133,
+    "experience_years": 6,
+    "price": 399,
+    "currency": "INR",
+    "eta_minutes": 30,
+    "phone": "+919810054280",
+    "services": [
+      "Carpentry",
+      "Door Lock Installation",
+      "Furniture Assembly",
+      "Cabinet Hinge Repair",
+      "Custom Shelving"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": false
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "CP041",
+    "name": "Royal Carpentry Studio",
+    "category": "Carpentry",
+    "location": {
+      "pincode": "560100",
+      "area": "Electronic City",
+      "city": "Bengaluru"
+    },
+    "rating": 4.6,
+    "review_count": 164,
+    "experience_years": 7,
+    "price": 419,
+    "currency": "INR",
+    "eta_minutes": 35,
+    "phone": "+919810055637",
+    "services": [
+      "Carpentry",
+      "Door Lock Installation",
+      "Furniture Assembly",
+      "Cabinet Hinge Repair",
+      "Custom Shelving"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "09:00",
+        "end": "10:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "11:00",
+        "end": "12:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "15:00",
+        "end": "16:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "19:00",
+        "end": "20:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "PL042",
+    "name": "MG Road / Shivajinagar Plumbing Specialist",
+    "category": "Plumbing",
+    "location": {
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
+      "city": "Bengaluru"
+    },
+    "rating": 4.6,
+    "review_count": 88,
+    "experience_years": 5,
+    "price": 319,
+    "currency": "INR",
+    "eta_minutes": 25,
+    "phone": "+919820050594",
+    "services": [
+      "Plumbing",
+      "Kitchen Tap Leak",
+      "Pipe Replacement",
+      "Bathroom Fitting",
+      "Drain Cleaning"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "16:00",
+        "end": "17:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "EL043",
+    "name": "Koramangala Electrical Specialist",
+    "category": "Electrical",
+    "location": {
+      "pincode": "560034",
+      "area": "Koramangala",
+      "city": "Bengaluru"
+    },
+    "rating": 4.6,
+    "review_count": 88,
+    "experience_years": 5,
+    "price": 369,
+    "currency": "INR",
+    "eta_minutes": 25,
+    "phone": "+919820051828",
+    "services": [
+      "Electrical Repair",
+      "Short Circuit Fix",
+      "Fan Repair & Installation",
+      "Switchboard Replacement",
+      "Inverter Wiring"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "16:00",
+        "end": "17:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  },
+  {
+    "provider_id": "CL044",
+    "name": "BTM Layout Cleaning Specialist",
+    "category": "Cleaning",
+    "location": {
+      "pincode": "560076",
+      "area": "BTM Layout",
+      "city": "Bengaluru"
+    },
+    "rating": 4.6,
+    "review_count": 88,
+    "experience_years": 5,
+    "price": 919,
+    "currency": "INR",
+    "eta_minutes": 25,
+    "phone": "+919820053062",
+    "services": [
+      "Deep Home Cleaning",
+      "Kitchen Deep Clean",
+      "Bathroom Sanitization",
+      "Sofa Shampooing",
+      "Full House Clean"
+    ],
+    "availability": [
+      {
+        "date": "2026-09-21",
+        "start": "10:00",
+        "end": "11:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-21",
+        "start": "18:00",
+        "end": "19:00",
+        "available": true
+      },
+      {
+        "date": "2026-09-22",
+        "start": "16:00",
+        "end": "17:00",
+        "available": true
+      }
+    ],
+    "status": "active"
+  }
+]

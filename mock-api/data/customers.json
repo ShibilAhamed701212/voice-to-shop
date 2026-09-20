@@ -1,0 +1,222 @@
+[
+  {
+    "customer_id": "C001",
+    "name": "Ananya Sharma",
+    "phone": "+919876500001",
+    "email": "ananya.s@fictional.com",
+    "default_location": {
+      "pincode": "560064",
+      "area": "Yelahanka",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C002",
+    "name": "Vikram Malhotra",
+    "phone": "+919876500002",
+    "email": "vikram.m@fictional.com",
+    "default_location": {
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C003",
+    "name": "Sneha Reddy",
+    "phone": "+919876500003",
+    "email": "sneha.r@fictional.com",
+    "default_location": {
+      "pincode": "560034",
+      "area": "Koramangala",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C004",
+    "name": "Rohan Varma",
+    "phone": "+919876500004",
+    "email": "rohan.v@fictional.com",
+    "default_location": {
+      "pincode": "560076",
+      "area": "BTM Layout",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C005",
+    "name": "Divya Iyer",
+    "phone": "+919876500005",
+    "email": "divya.i@fictional.com",
+    "default_location": {
+      "pincode": "560066",
+      "area": "Whitefield",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C006",
+    "name": "Arjun Nair",
+    "phone": "+919876500006",
+    "email": "arjun.n@fictional.com",
+    "default_location": {
+      "pincode": "560100",
+      "area": "Electronic City",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C007",
+    "name": "Meera Patel",
+    "phone": "+919876500007",
+    "email": "meera.p@fictional.com",
+    "default_location": {
+      "pincode": "560037",
+      "area": "Marathahalli",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C008",
+    "name": "Karthik Krishnan",
+    "phone": "+919876500008",
+    "email": "karthik.k@fictional.com",
+    "default_location": {
+      "pincode": "560085",
+      "area": "Banashankari",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C009",
+    "name": "Pooja Hegde",
+    "phone": "+919876500009",
+    "email": "pooja.h@fictional.com",
+    "default_location": {
+      "pincode": "560064",
+      "area": "Yelahanka",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C010",
+    "name": "Naveen Prasad",
+    "phone": "+919876500010",
+    "email": "naveen.p@fictional.com",
+    "default_location": {
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C011",
+    "name": "Swathi Rao",
+    "phone": "+919876500011",
+    "email": "swathi.r@fictional.com",
+    "default_location": {
+      "pincode": "560034",
+      "area": "Koramangala",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C012",
+    "name": "Gaurav Sen",
+    "phone": "+919876500012",
+    "email": "gaurav.s@fictional.com",
+    "default_location": {
+      "pincode": "560076",
+      "area": "BTM Layout",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C013",
+    "name": "Kavita Deshmukh",
+    "phone": "+919876500013",
+    "email": "kavita.d@fictional.com",
+    "default_location": {
+      "pincode": "560066",
+      "area": "Whitefield",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C014",
+    "name": "Siddharth Joshi",
+    "phone": "+919876500014",
+    "email": "siddharth.j@fictional.com",
+    "default_location": {
+      "pincode": "560100",
+      "area": "Electronic City",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C015",
+    "name": "Preeti Singh",
+    "phone": "+919876500015",
+    "email": "preeti.s@fictional.com",
+    "default_location": {
+      "pincode": "560037",
+      "area": "Marathahalli",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C016",
+    "name": "Rajesh Kannan",
+    "phone": "+919876500016",
+    "email": "rajesh.k@fictional.com",
+    "default_location": {
+      "pincode": "560085",
+      "area": "Banashankari",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C017",
+    "name": "Aditi Ghosh",
+    "phone": "+919876500017",
+    "email": "aditi.g@fictional.com",
+    "default_location": {
+      "pincode": "560064",
+      "area": "Yelahanka",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C018",
+    "name": "Manoj Shetty",
+    "phone": "+919876500018",
+    "email": "manoj.s@fictional.com",
+    "default_location": {
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C019",
+    "name": "Deepa Menon",
+    "phone": "+919876500019",
+    "email": "deepa.m@fictional.com",
+    "default_location": {
+      "pincode": "560034",
+      "area": "Koramangala",
+      "city": "Bengaluru"
+    }
+  },
+  {
+    "customer_id": "C020",
+    "name": "Tarun Kapoor",
+    "phone": "+919876500020",
+    "email": "tarun.k@fictional.com",
+    "default_location": {
+      "pincode": "560076",
+      "area": "BTM Layout",
+      "city": "Bengaluru"
+    }
+  }
+]

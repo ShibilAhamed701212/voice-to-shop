@@ -1,0 +1,11 @@
+{
+  "customer_id": "C001",
+  "customer_name": "Ananya Sharma",
+  "provider_id": "AC001",
+  "service": "AC Repair",
+  "problem": "AC not cooling properly",
+  "date": "2026-09-21",
+  "start_time": "18:00",
+  "end_time": "19:00",
+  "price": 399
+}

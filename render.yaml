@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: ps06-voice-booking
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8000

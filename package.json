@@ -1,0 +1,19 @@
+{
+  "name": "ps06-service-booking-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Voice-First Service Booking Platform (PS-06)",
+  "scripts": {
+    "install:all": "npm --prefix frontend install && npm --prefix mock-api install",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "npm --prefix mock-api run build",
+    "build": "npm --prefix frontend install && npm --prefix frontend run build && npm --prefix mock-api install && npm --prefix mock-api run build",
+    "start": "node mock-api/dist/server.js",
+    "test": "npm --prefix mock-api test",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix mock-api run dev"
+  },
+  "keywords": ["voice-agent", "booking", "make-com", "elevenlabs", "react", "render"],
+  "author": "Shibil Ahamed",
+  "license": "MIT"
+}
