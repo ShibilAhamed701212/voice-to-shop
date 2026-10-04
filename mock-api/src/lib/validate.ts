@@ -5,7 +5,7 @@
  */
 export function nonStringFields(source: unknown, fields: readonly string[]): string[] {
   const obj = (source && typeof source === 'object' ? source : {}) as Record<string, unknown>;
-  return fields.filter(f => obj[f] !== undefined && obj[f] !== null && typeof obj[f] !== 'string');
+  return fields.filter(f => obj[f] !== undefined && typeof obj[f] !== 'string');
 }
 
 export function invalidFieldsBody(fields: string[]) {

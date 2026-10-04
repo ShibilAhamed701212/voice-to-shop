@@ -119,12 +119,15 @@ describe('Booking API & availability lifecycle', () => {
     const bogus = await request(app).patch('/api/bookings/AC1435').send({ status: 'bogus' });
     expect(bogus.status).toBe(400);
     const objName = await request(app).patch('/api/bookings/AC1435').send({ customer_name: { x: 1 } });
+    expect(objName.status).toBe(400);
     expect(objName.body.error).toBe('INVALID_FIELD');
     expect(BookingService.getById('AC1435')!.status).not.toBe('bogus');
 
     const done = await request(app).patch('/api/bookings/AC1435').send({ status: 'completed' });
     expect(done.status).toBe(200);
     expect(done.body.booking.status).toBe('completed');
+    const again = await request(app).patch('/api/bookings/AC1435').send({ status: 'completed' });
+    expect(again.body.error).toBe('INVALID_STATUS_CHANGE');
     const missing = await request(app).patch('/api/bookings/NOPE').send({ problem: 'x' });
     expect(missing.status).toBe(404);
   });
@@ -139,6 +142,8 @@ describe('Booking API & availability lifecycle', () => {
     expect(providers.status).toBe(400);
     const search = await request(app).post('/api/providers/search').send({ problem: 3 });
     expect(search.status).toBe(400);
+    const nullReason = await request(app).post('/api/bookings/AC1435/cancel').send({ reason: null });
+    expect(nullReason.status).toBe(400);
   });
 
   it('malformed JSON returns a JSON 400', async () => {

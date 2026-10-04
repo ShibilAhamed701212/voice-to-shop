@@ -106,7 +106,7 @@ export class BookingService {
       }
     }
     const status = updates.status;
-    if (status !== undefined && status !== booking.status) {
+    if (status !== undefined) {
       if (!PATCHABLE_STATUS.includes(status as BookingStatus) || TERMINAL.includes(booking.status)) {
         return { success: false, error: 'INVALID_STATUS_CHANGE' };
       }
