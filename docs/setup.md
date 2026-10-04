@@ -42,12 +42,12 @@ If the webhook errors, times out (30s) or returns no `text`, the built-in agent 
 npm test
 ```
 
-The tests freeze the clock with `APP_FIXED_NOW`. They cover provider search and ranking, the rolling availability window, booking, double-booking (including concurrent requests), reschedule and cancel, the full demo conversation, and NLU parsing (dates, times, PIN codes, Hinglish).
+The tests need Node 22.12 or newer (Vitest 5); the app itself runs on Node 20. They freeze the clock with `APP_FIXED_NOW`. They cover provider search and ranking, the rolling availability window, booking, double-booking (including concurrent requests), reschedule and cancel, PATCH and input validation, the full demo conversation, and NLU parsing (dates, times, PIN codes, Hinglish).
 
 ## Production
 
 ### Render
-`render.yaml` builds both packages (`npm run build`) and starts Express (`npm start`), which serves the app and the API on one port. Set `MAKE_WEBHOOK_URL` and `ELEVENLABS_API_KEY` in the Render dashboard. On the free tier the disk is ephemeral, so bookings reset on each deploy.
+`render.yaml` builds both packages (`npm run build`) and starts Express (`npm start`), which serves the app and the API on one port. Set `ANTHROPIC_API_KEY`, `MAKE_WEBHOOK_URL` and `ELEVENLABS_API_KEY` in the Render dashboard as needed. The blueprint also sets `ALLOW_RESET=true`, so anyone can restore the demo data on the deployed site; remove it if that's not wanted. On the free tier the disk is ephemeral, so bookings reset on each deploy.
 
 ### Docker
 

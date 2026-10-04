@@ -27,9 +27,16 @@ function generateId(prefix: string): string {
   return `${prefix}${Date.now().toString().slice(-6)}`;
 }
 
-/** Fields callers may change through PATCH. Slot changes must go through reschedule. */
-const PATCHABLE: (keyof Booking)[] = ['problem', 'customer_name', 'status'];
+/** Text fields callers may change through PATCH. Slot changes must go through reschedule. */
+const PATCHABLE_TEXT = ['problem', 'customer_name'] as const;
+const MAX_TEXT_LENGTH = 500;
 const TERMINAL: BookingStatus[] = ['cancelled', 'completed', 'provider_cancelled'];
+/**
+ * Status changes PATCH may make. Cancelling goes through /cancel, and nothing may move a
+ * booking out of a terminal status: re-activating it would hold a slot that may have been
+ * booked by someone else since.
+ */
+const PATCHABLE_STATUS: BookingStatus[] = ['completed'];
 
 export class BookingService {
   static getAll(): Booking[] {
@@ -88,15 +95,30 @@ export class BookingService {
     return { success: true, booking };
   }
 
-  static update(id: string, updates: Partial<Booking>): Booking | undefined {
+  static update(id: string, updates: Record<string, unknown>): BookingResult {
     const booking = this.getById(id);
-    if (!booking) return undefined;
-    for (const field of PATCHABLE) {
-      if (updates[field] !== undefined) (booking as any)[field] = updates[field];
+    if (!booking) return { success: false, error: 'BOOKING_NOT_FOUND' };
+
+    for (const field of PATCHABLE_TEXT) {
+      const value = updates[field];
+      if (value !== undefined && (typeof value !== 'string' || value.length > MAX_TEXT_LENGTH)) {
+        return { success: false, error: 'INVALID_FIELD' };
+      }
     }
+    const status = updates.status;
+    if (status !== undefined && status !== booking.status) {
+      if (!PATCHABLE_STATUS.includes(status as BookingStatus) || TERMINAL.includes(booking.status)) {
+        return { success: false, error: 'INVALID_STATUS_CHANGE' };
+      }
+    }
+
+    for (const field of PATCHABLE_TEXT) {
+      if (typeof updates[field] === 'string') booking[field] = (updates[field] as string).trim();
+    }
+    if (status !== undefined) booking.status = status as BookingStatus;
     booking.updated_at = new Date().toISOString();
     persist();
-    return booking;
+    return { success: true, booking };
   }
 
   static cancel(id: string, reason?: string): BookingResult {

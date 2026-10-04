@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { ProviderService, ProviderSearchParams } from '../services/providerService.js';
 import { AvailabilityService } from '../services/availabilityService.js';
+import { invalidFieldsBody, nonStringFields } from '../lib/validate.js';
 
 const router = Router();
 
@@ -8,6 +9,8 @@ const router = Router();
 // Query parameters: service, pincode, date, start_time, end_time
 router.get('/', (req: Request, res: Response) => {
   try {
+    const invalid = nonStringFields(req.query, ['service', 'category', 'pincode', 'date', 'start_time', 'end_time', 'preferred_time']);
+    if (invalid.length) return res.status(400).json(invalidFieldsBody(invalid));
     const filters: ProviderSearchParams = {
       service: req.query.service as string,
       category: req.query.category as string,
@@ -33,6 +36,8 @@ router.get('/', (req: Request, res: Response) => {
 router.post('/search', (req: Request, res: Response) => {
   try {
     const { service, category, problem, pincode, date, preferred_time } = req.body ?? {};
+    const invalid = nonStringFields(req.body, ['service', 'category', 'problem', 'pincode', 'date', 'preferred_time']);
+    if (invalid.length) return res.status(400).json(invalidFieldsBody(invalid));
     const providers = ProviderService.search({
       service,
       category,
@@ -68,7 +73,9 @@ router.get('/:id', (req: Request, res: Response) => {
 // GET /api/providers/:id/availability
 router.get('/:id/availability', (req: Request, res: Response) => {
   try {
-    const date = req.query.date as string;
+    const invalid = nonStringFields(req.query, ['date']);
+    if (invalid.length) return res.status(400).json(invalidFieldsBody(invalid));
+    const date = req.query.date as string | undefined;
     const slots = AvailabilityService.getProviderSlots(req.params.id as string, date);
     res.json({
       success: true,
@@ -85,6 +92,8 @@ router.get('/:id/availability', (req: Request, res: Response) => {
 const handleUpdateAvailability = (req: Request, res: Response) => {
   try {
     const { date, start_time, available } = req.body ?? {};
+    const invalid = nonStringFields(req.body, ['date', 'start_time']);
+    if (invalid.length) return res.status(400).json(invalidFieldsBody(invalid));
     if (!date || !start_time) {
       return res.status(400).json({ success: false, error: 'MISSING_DATE_OR_TIME' });
     }
