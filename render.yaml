@@ -6,8 +6,15 @@ services:
     region: oregon
     buildCommand: npm run build
     startCommand: npm start
+    healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 8000
+      - key: NODE_VERSION
+        value: "20"
+      - key: MAKE_WEBHOOK_URL
+        sync: false
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      - key: ALLOW_RESET
+        value: "true"

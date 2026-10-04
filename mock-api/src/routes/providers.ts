@@ -10,6 +10,7 @@ router.get('/', (req: Request, res: Response) => {
   try {
     const filters: ProviderSearchParams = {
       service: req.query.service as string,
+      category: req.query.category as string,
       pincode: req.query.pincode as string,
       date: req.query.date as string,
       start_time: req.query.start_time as string,
@@ -31,9 +32,10 @@ router.get('/', (req: Request, res: Response) => {
 // POST /api/providers/search
 router.post('/search', (req: Request, res: Response) => {
   try {
-    const { service, problem, pincode, date, preferred_time } = req.body;
+    const { service, category, problem, pincode, date, preferred_time } = req.body ?? {};
     const providers = ProviderService.search({
       service,
+      category,
       problem,
       pincode,
       date,
@@ -79,17 +81,17 @@ router.get('/:id/availability', (req: Request, res: Response) => {
   }
 });
 
-// POST or PATCH /api/providers/:id/availability (to update/lock slots)
+// POST or PATCH /api/providers/:id/availability — manually block (available:false) or unblock a slot
 const handleUpdateAvailability = (req: Request, res: Response) => {
   try {
-    const { date, start_time, available, end_time } = req.body;
+    const { date, start_time, available } = req.body ?? {};
     if (!date || !start_time) {
       return res.status(400).json({ success: false, error: 'MISSING_DATE_OR_TIME' });
     }
 
     const providerId = req.params.id as string;
     if (available === false) {
-      const reserved = AvailabilityService.reserveSlot(providerId, date, start_time, end_time);
+      const reserved = AvailabilityService.reserveSlot(providerId, date, start_time);
       if (!reserved) {
         return res.status(409).json({ success: false, error: 'SLOT_UNAVAILABLE' });
       }

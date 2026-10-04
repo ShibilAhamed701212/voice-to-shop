@@ -1,193 +1,131 @@
-import fs from 'fs';
-import path from 'path';
+import { readSeed } from '../lib/store.js';
+import { isIsoDate } from '../lib/time.js';
 import { AvailabilityService } from './availabilityService.js';
-import { ProviderService } from './providerService.js';
+import { Booking, BookingStatus, getState, persist } from './bookingStore.js';
 
-export interface Booking {
-  booking_id: string;
+export type { Booking, BookingStatus } from './bookingStore.js';
+
+export type BookingResult = { success: boolean; booking?: Booking; error?: string };
+
+interface Customer {
   customer_id: string;
-  customer_name?: string;
-  provider_id: string;
-  provider_name: string;
-  service: string;
-  problem: string;
-  date: string;
-  start_time: string;
-  end_time: string;
-  price: number;
-  currency: string;
-  status: 'pending' | 'confirmed' | 'cancelled' | 'rescheduled' | 'completed' | 'provider_cancelled';
-  created_at: string;
-  location?: {
-    pincode: string;
-    area: string;
-    city: string;
-  };
+  name: string;
 }
 
-function getDataPath(filename: string): string {
-  const candidates = [
-    path.join(__dirname, '..', '..', 'data', filename),
-    path.join(__dirname, '..', 'data', filename),
-    path.resolve(process.cwd(), 'data', filename),
-    path.resolve(process.cwd(), 'mock-api', 'data', filename)
-  ];
-  for (const p of candidates) {
-    if (fs.existsSync(p)) return p;
+let customers: Customer[] | null = null;
+function customerName(id: string): string | undefined {
+  if (!customers) customers = readSeed<Customer[]>('customers.json');
+  return customers.find(c => c.customer_id.toLowerCase() === id.toLowerCase())?.name;
+}
+
+function generateId(prefix: string): string {
+  const existing = new Set(getState().bookings.map(b => b.booking_id));
+  for (let i = 0; i < 50; i++) {
+    const id = `${prefix}${Math.floor(1000 + Math.random() * 9000)}`;
+    if (!existing.has(id)) return id;
   }
-  return candidates[0];
+  return `${prefix}${Date.now().toString().slice(-6)}`;
 }
 
-const DATA_FILE = getDataPath('bookings.json');
-let bookingsCache: Booking[] = [];
-let seedBookingsBackup: Booking[] = [];
-
-function loadBookings(): Booking[] {
-  if (bookingsCache.length === 0) {
-    if (fs.existsSync(DATA_FILE)) {
-      const raw = fs.readFileSync(DATA_FILE, 'utf-8');
-      seedBookingsBackup = JSON.parse(raw);
-      bookingsCache = JSON.parse(raw);
-    }
-  }
-  return bookingsCache;
-}
-
-export function saveBookings(): void {
-  if (process.env.NODE_ENV === 'test') return;
-  try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(bookingsCache, null, 2), 'utf-8');
-  } catch (err) {
-    console.error('Error saving bookings to disk:', err);
-  }
-}
-
-export function resetBookingsCache(): void {
-  if (seedBookingsBackup.length > 0) {
-    bookingsCache = JSON.parse(JSON.stringify(seedBookingsBackup));
-  } else {
-    bookingsCache = [];
-    loadBookings();
-  }
-}
+/** Fields callers may change through PATCH. Slot changes must go through reschedule. */
+const PATCHABLE: (keyof Booking)[] = ['problem', 'customer_name', 'status'];
+const TERMINAL: BookingStatus[] = ['cancelled', 'completed', 'provider_cancelled'];
 
 export class BookingService {
   static getAll(): Booking[] {
-    return loadBookings();
+    return getState().bookings;
   }
 
   static getById(id: string): Booking | undefined {
-    const list = loadBookings();
-    return list.find(b => b.booking_id.toLowerCase() === id.toLowerCase());
+    const key = id.toLowerCase();
+    return getState().bookings.find(b => b.booking_id.toLowerCase() === key);
   }
 
+  /**
+   * Check-and-insert runs synchronously on Node's single thread, so two requests
+   * can never both see a slot as free: the second one gets SLOT_UNAVAILABLE.
+   */
   static create(params: {
     customer_id: string;
     customer_name?: string;
     provider_id: string;
-    service: string;
-    problem: string;
+    service?: string;
+    problem?: string;
     date: string;
     start_time: string;
     end_time?: string;
     price?: number;
-  }): { success: boolean; booking?: Booking; error?: string } {
-    const provider = ProviderService.getById(params.provider_id);
-    if (!provider) {
-      return { success: false, error: 'PROVIDER_NOT_FOUND' };
+  }): BookingResult {
+    const provider = AvailabilityService.getRecord(params.provider_id);
+    if (!provider || provider.status !== 'active') return { success: false, error: 'PROVIDER_NOT_FOUND' };
+    if (!isIsoDate(params.date) || !AvailabilityService.isBookableDate(params.date)) {
+      return { success: false, error: 'INVALID_DATE' };
     }
 
-    const endTime = params.end_time || `${parseInt(params.start_time.split(':')[0]) + 1}:00`;
+    const slot = AvailabilityService.findSlot(provider.provider_id, params.date, params.start_time);
+    if (!slot || !slot.available) return { success: false, error: 'SLOT_UNAVAILABLE' };
 
-    // Check slot availability and lock
-    const reserved = AvailabilityService.reserveSlot(params.provider_id, params.date, params.start_time, endTime);
-    if (!reserved) {
-      return { success: false, error: 'SLOT_UNAVAILABLE' };
-    }
-
-    // Generate dynamic booking ID (e.g., AC2841)
-    const prefix = provider.provider_id.slice(0, 2);
-    const randomNum = Math.floor(1000 + Math.random() * 9000);
-    const bookingId = `${prefix}${randomNum}`;
-
-    const newBooking: Booking = {
-      booking_id: bookingId,
+    const booking: Booking = {
+      booking_id: generateId(provider.provider_id.slice(0, 2)),
       customer_id: params.customer_id,
-      customer_name: params.customer_name || 'Valued Customer',
+      customer_name: params.customer_name || customerName(params.customer_id) || 'Valued Customer',
       provider_id: provider.provider_id,
       provider_name: provider.name,
       service: params.service || provider.category,
       problem: params.problem || 'Home service request',
       date: params.date,
-      start_time: params.start_time,
-      end_time: endTime,
-      price: params.price || provider.price,
+      start_time: slot.start,
+      end_time: slot.end,
+      price: provider.price,
       currency: provider.currency || 'INR',
       status: 'confirmed',
       created_at: new Date().toISOString(),
       location: provider.location
     };
 
-    const bookings = loadBookings();
-    bookings.unshift(newBooking);
-    saveBookings();
-
-    return { success: true, booking: newBooking };
-  }
-
-  static update(id: string, updates: Partial<Booking>): Booking | undefined {
-    const bookings = loadBookings();
-    const index = bookings.findIndex(b => b.booking_id.toLowerCase() === id.toLowerCase());
-    if (index === -1) return undefined;
-
-    bookings[index] = { ...bookings[index], ...updates };
-    saveBookings();
-    return bookings[index];
-  }
-
-  static cancel(id: string, reason?: string): { success: boolean; booking?: Booking; error?: string } {
-    const booking = this.getById(id);
-    if (!booking) {
-      return { success: false, error: 'BOOKING_NOT_FOUND' };
-    }
-
-    if (booking.status === 'cancelled') {
-      return { success: false, error: 'ALREADY_CANCELLED' };
-    }
-
-    // Release provider slot
-    AvailabilityService.releaseSlot(booking.provider_id, booking.date, booking.start_time);
-
-    booking.status = 'cancelled';
-    saveBookings();
-
+    getState().bookings.unshift(booking);
+    persist();
     return { success: true, booking };
   }
 
-  static reschedule(id: string, newDate: string, newStartTime: string, newEndTime?: string): { success: boolean; booking?: Booking; error?: string } {
+  static update(id: string, updates: Partial<Booking>): Booking | undefined {
     const booking = this.getById(id);
-    if (!booking) {
-      return { success: false, error: 'BOOKING_NOT_FOUND' };
+    if (!booking) return undefined;
+    for (const field of PATCHABLE) {
+      if (updates[field] !== undefined) (booking as any)[field] = updates[field];
     }
+    booking.updated_at = new Date().toISOString();
+    persist();
+    return booking;
+  }
 
-    const endTime = newEndTime || `${parseInt(newStartTime.split(':')[0]) + 1}:00`;
+  static cancel(id: string, reason?: string): BookingResult {
+    const booking = this.getById(id);
+    if (!booking) return { success: false, error: 'BOOKING_NOT_FOUND' };
+    if (booking.status === 'cancelled') return { success: false, error: 'ALREADY_CANCELLED' };
+    if (TERMINAL.includes(booking.status)) return { success: false, error: 'BOOKING_NOT_ACTIVE' };
 
-    // Try reserving new slot
-    const reserved = AvailabilityService.reserveSlot(booking.provider_id, newDate, newStartTime, endTime);
-    if (!reserved) {
-      return { success: false, error: 'NEW_SLOT_UNAVAILABLE' };
-    }
+    booking.status = 'cancelled';
+    booking.cancel_reason = reason;
+    booking.updated_at = new Date().toISOString();
+    persist();
+    return { success: true, booking };
+  }
 
-    // Release old slot
-    AvailabilityService.releaseSlot(booking.provider_id, booking.date, booking.start_time);
+  static reschedule(id: string, newDate: string, newStartTime: string): BookingResult {
+    const booking = this.getById(id);
+    if (!booking) return { success: false, error: 'BOOKING_NOT_FOUND' };
+    if (TERMINAL.includes(booking.status)) return { success: false, error: 'BOOKING_NOT_ACTIVE' };
 
-    // Update booking
-    booking.date = newDate;
-    booking.start_time = newStartTime;
-    booking.end_time = endTime;
+    const slot = AvailabilityService.findSlot(booking.provider_id, newDate, newStartTime, booking.booking_id);
+    if (!slot || !slot.available) return { success: false, error: 'NEW_SLOT_UNAVAILABLE' };
+
+    booking.date = slot.date;
+    booking.start_time = slot.start;
+    booking.end_time = slot.end;
     booking.status = 'rescheduled';
-    saveBookings();
-
+    booking.updated_at = new Date().toISOString();
+    persist();
     return { success: true, booking };
   }
 }

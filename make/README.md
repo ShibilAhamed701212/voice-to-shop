@@ -12,11 +12,11 @@ This guide provides end-to-end instructions for configuring your **Make.com Scen
 4. Click **Add**, name it `PS06-Voice-Agent-Webhook`, and save.
 5. Copy the generated Webhook URL (e.g., `https://hook.eu1.make.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`).
 6. Paste this URL into your local environment:
-   - In `PS06-Service-Booking-Agent/frontend/.env`:
+   - In the repo-root `.env` (server-side):
      ```env
-     VITE_MAKE_WEBHOOK_URL=https://hook.eu1.make.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+     MAKE_WEBHOOK_URL=https://hook.eu1.make.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
      ```
-   - Or paste it directly into the frontend UI **Settings & Webhook** panel.
+   - Or paste it into the app under **Settings → Agent brain → Custom webhook URL**, then select **Make.com AI Agent**.
 
 ---
 
@@ -24,14 +24,14 @@ This guide provides end-to-end instructions for configuring your **Make.com Scen
 
 1. In your scenario, connect the webhook to the **Make AI Agent** module.
 2. Set the model to your preferred LLM (e.g. OpenAI GPT-4o / Claude 3.5 Sonnet / Gemini 1.5 Pro).
-3. Copy the system prompt from [make/ai-agent-prompt.md](file:///d:/var-codes/voice-to-shop/PS06-Service-Booking-Agent/make/ai-agent-prompt.md) into the **System Instructions** field.
+3. Copy the system prompt from [make/ai-agent-prompt.md](ai-agent-prompt.md) into the **System Instructions** field.
 4. Set **Temperature** to `0.2` for deterministic tool invocation and objective provider comparisons.
 
 ---
 
 ## 3. Attach AI Agent Tools (HTTP Modules)
 
-Configure the tools defined in [make/tool-definitions.md](file:///d:/var-codes/voice-to-shop/PS06-Service-Booking-Agent/make/tool-definitions.md):
+Configure the tools defined in [make/tool-definitions.md](tool-definitions.md):
 
 ### Tool 1: `search_providers`
 - **Method**: `POST`
@@ -141,5 +141,5 @@ Configure the tools defined in [make/tool-definitions.md](file:///d:/var-codes/v
 
 ## 7. Zero-Setup Local Fallback Mode
 When developing locally without setting up the Make scenario immediately, the frontend connects seamlessly to the built-in **Make Webhook Simulator** at:
-`http://localhost:8000/api/make-simulator`
-which implements the exact same state machine and response JSON contract.
+`http://localhost:8000/api/make-simulator` (or `POST /api/agent/message` with `mode: "local"`),
+which implements the same dialogue rules and response JSON contract. The web app falls back to it automatically if your Make webhook fails.

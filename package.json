@@ -1,19 +1,26 @@
 {
-  "name": "ps06-service-booking-platform",
-  "version": "1.0.0",
+  "name": "voicefix-ps06",
+  "version": "2.0.0",
   "private": true,
-  "description": "Voice-First Service Booking Platform (PS-06)",
+  "description": "VoiceFix — voice-first home service booking (PS-06)",
   "scripts": {
-    "install:all": "npm --prefix frontend install && npm --prefix mock-api install",
-    "build:frontend": "npm --prefix frontend run build",
-    "build:backend": "npm --prefix mock-api run build",
-    "build": "npm --prefix frontend install && npm --prefix frontend run build && npm --prefix mock-api install && npm --prefix mock-api run build",
+    "setup": "npm install && npm --prefix mock-api install && npm --prefix frontend install",
+    "postinstall": "node -e \"require('fs').existsSync('.env')||require('fs').copyFileSync('.env.example','.env')\"",
+    "dev": "concurrently -k -n api,web -c magenta,cyan \"npm --prefix mock-api run dev\" \"npm --prefix frontend run dev\"",
+    "dev:api": "npm --prefix mock-api run dev",
+    "dev:web": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend install --include=dev && npm --prefix frontend run build && npm --prefix mock-api install --include=dev && npm --prefix mock-api run build",
     "start": "node mock-api/dist/server.js",
     "test": "npm --prefix mock-api test",
-    "dev:frontend": "npm --prefix frontend run dev",
-    "dev:backend": "npm --prefix mock-api run dev"
+    "typecheck": "npm --prefix mock-api run typecheck && npm --prefix frontend run typecheck"
   },
-  "keywords": ["voice-agent", "booking", "make-com", "elevenlabs", "react", "render"],
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": ["voice-agent", "booking", "make-com", "elevenlabs", "react", "express"],
   "author": "Shibil Ahamed",
   "license": "MIT"
 }

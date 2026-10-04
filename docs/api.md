@@ -281,3 +281,55 @@ Reschedules a booking to a new date and time.
   }
 }
 ```
+
+
+---
+
+## 4. Agent, config & voice endpoints (v2)
+
+### `POST /api/agent/message`
+One conversation turn.
+
+```json
+{ "session_id": "sess_abc", "customer_id": "C001", "message": "My AC isn't cooling", "mode": "local", "language": "en-IN",
+  "action": { "type": "select", "provider_id": "AC001", "date": "2026-10-05", "start_time": "18:00" } }
+```
+
+- `mode`: `local` (built-in agent) or `make` (forwards to `MAKE_WEBHOOK_URL`, falling back to local with `fallback: true` and a `notice`).
+- `action` (optional) carries structured UI intents: `select`, `confirm`, `decline`, `cancel_booking`, `reschedule_booking` or `reset`.
+
+Response:
+
+```json
+{
+  "session_id": "sess_abc", "source": "local", "response_type": "voice",
+  "text": "Rahul Kumar is ₹399 and available tomorrow from 6 to 7 PM. Shall I confirm the booking?",
+  "stage": "confirming",
+  "state": { "service": "AC Repair", "problem": "AC not cooling", "pincode": "560064", "area": "Yelahanka", "date": "2026-10-05", "time": "18:00", "provider_id": "AC001", "provider_name": "Rahul Kumar", "price": 399, "booking_id": null },
+  "options": [ { "...provider": "", "slots": [], "recommended_slot": {}, "badges": ["Recommended"] } ],
+  "proposal": { "kind": "booking", "provider_id": "AC001", "date": "2026-10-05", "start_time": "18:00", "end_time": "19:00", "price": 399 },
+  "suggestions": ["Yes, book it", "No, show other options"]
+}
+```
+
+`stage` is one of `gathering`, `options`, `confirming`, `booked`, `confirm_cancel`, `reschedule_ask` or `confirm_reschedule`. `POST /api/make-simulator` is kept as an alias that always uses the built-in agent.
+
+### `GET /api/config`
+Returns `{ today, timezone, horizon_days, make_webhook_configured, elevenlabs_configured }`. Secret values are never included.
+
+### `GET /api/meta`
+Returns the categories (count, min price) and service areas (PIN code, area) used for filters.
+
+### `GET /api/bookings?customer_id=C001&status=confirmed`
+Lists bookings, filtered by customer and/or status.
+
+### `POST /api/admin/reset`
+Restores the seed data. In production it requires `ALLOW_RESET=true`.
+
+### `POST /api/voice/stt` / `POST /api/voice/tts`
+ElevenLabs proxy. STT takes raw audio (`Content-Type: audio/webm|mp4|ogg`) and returns `{ text }`. TTS takes `{ text }` and returns `audio/mpeg`. Both return `503` / `fallback: true` when no server key is set.
+
+### Availability & booking rules
+- Slots are generated for a rolling 14-day window from each provider's daily `schedule`. Same-day slots need 1 hour of lead time.
+- `POST /api/bookings` accepts only slots on the provider's schedule. The price always comes from the provider record, so a client-supplied `price` is ignored.
+- A taken slot returns `409 SLOT_UNAVAILABLE` together with up to 3 `alternatives`.

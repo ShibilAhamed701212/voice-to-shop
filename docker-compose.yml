@@ -1,27 +1,14 @@
-version: '3.8'
-
 services:
-  mock-api:
-    build:
-      context: ./mock-api
-      dockerfile: Dockerfile
+  voicefix:
+    build: .
     ports:
       - "8000:8000"
-    environment:
-      - PORT=8000
-      - NODE_ENV=development
+    env_file:
+      - path: .env
+        required: false
     volumes:
-      - ./mock-api/data:/app/data
+      - voicefix-state:/app/state
     restart: unless-stopped
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "5173:5173"
-    environment:
-      - VITE_MOCK_API_URL=http://localhost:8000
-    depends_on:
-      - mock-api
-    restart: unless-stopped
+volumes:
+  voicefix-state:

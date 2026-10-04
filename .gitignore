@@ -31,3 +31,5 @@ Thumbs.db
 
 # Antigravity agent files
 .agents/
+# Runtime booking state (seed data lives in mock-api/data/*.json)
+mock-api/data/runtime/

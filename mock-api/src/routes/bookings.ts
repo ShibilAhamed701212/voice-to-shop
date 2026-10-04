@@ -1,5 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { BookingService } from '../services/bookingService.js';
+import { ProviderService } from '../services/providerService.js';
+import { isIsoDate } from '../lib/time.js';
 
 const router = Router();
 
@@ -7,8 +9,11 @@ const router = Router();
 router.get('/', (req: Request, res: Response) => {
   try {
     const list = BookingService.getAll();
-    const customerId = req.query.customer_id as string;
-    const filtered = customerId ? list.filter(b => b.customer_id === customerId) : list;
+    const customerId = (req.query.customer_id as string | undefined)?.toLowerCase();
+    const status = req.query.status as string | undefined;
+    const filtered = list.filter(
+      b => (!customerId || b.customer_id.toLowerCase() === customerId) && (!status || b.status === status)
+    );
     res.json({
       success: true,
       count: filtered.length,
@@ -35,7 +40,7 @@ router.get('/:id', (req: Request, res: Response) => {
 // POST /api/bookings
 router.post('/', (req: Request, res: Response) => {
   try {
-    const { customer_id, provider_id, service, problem, date, start_time, end_time, price, customer_name } = req.body;
+    const { customer_id, provider_id, service, problem, date, start_time, customer_name } = req.body ?? {};
 
     if (!customer_id || !provider_id || !date || !start_time) {
       return res.status(400).json({
@@ -52,16 +57,20 @@ router.post('/', (req: Request, res: Response) => {
       service,
       problem,
       date,
-      start_time,
-      end_time,
-      price
+      start_time
     });
 
     if (!result.success || !result.booking) {
-      const statusCode = result.error === 'SLOT_UNAVAILABLE' ? 409 : 400;
+      const statusCode = result.error === 'SLOT_UNAVAILABLE' ? 409 : result.error === 'PROVIDER_NOT_FOUND' ? 404 : 400;
+      // Give callers (e.g. the Make agent) something to offer instead.
+      const alternatives =
+        result.error === 'SLOT_UNAVAILABLE' && isIsoDate(date)
+          ? ProviderService.upcomingSlots(provider_id, date, 3)
+          : undefined;
       return res.status(statusCode).json({
         success: false,
-        error: result.error
+        error: result.error,
+        alternatives
       });
     }
 
@@ -77,7 +86,8 @@ router.post('/', (req: Request, res: Response) => {
       service: b.service,
       date: b.date,
       time: `${b.start_time}-${b.end_time}`,
-      price: b.price
+      price: b.price,
+      booking: b
     });
   } catch (err: any) {
     res.status(500).json({ success: false, error: err.message });
@@ -87,7 +97,7 @@ router.post('/', (req: Request, res: Response) => {
 // PATCH /api/bookings/:id
 router.patch('/:id', (req: Request, res: Response) => {
   try {
-    const updated = BookingService.update(req.params.id as string, req.body);
+    const updated = BookingService.update(req.params.id as string, req.body ?? {});
     if (!updated) {
       return res.status(404).json({ success: false, error: 'BOOKING_NOT_FOUND' });
     }
@@ -100,7 +110,7 @@ router.patch('/:id', (req: Request, res: Response) => {
 // POST /api/bookings/:id/cancel
 router.post('/:id/cancel', (req: Request, res: Response) => {
   try {
-    const { reason } = req.body;
+    const { reason } = req.body ?? {};
     const result = BookingService.cancel(req.params.id as string, reason);
     if (!result.success) {
       return res.status(400).json({ success: false, error: result.error });
@@ -118,7 +128,7 @@ router.post('/:id/cancel', (req: Request, res: Response) => {
 // POST /api/bookings/:id/reschedule
 router.post('/:id/reschedule', (req: Request, res: Response) => {
   try {
-    const { date, start_time, end_time } = req.body;
+    const { date, start_time } = req.body ?? {};
     if (!date || !start_time) {
       return res.status(400).json({
         success: false,
@@ -127,9 +137,9 @@ router.post('/:id/reschedule', (req: Request, res: Response) => {
       });
     }
 
-    const result = BookingService.reschedule(req.params.id as string, date, start_time, end_time);
+    const result = BookingService.reschedule(req.params.id as string, date, start_time);
     if (!result.success) {
-      const statusCode = result.error === 'NEW_SLOT_UNAVAILABLE' ? 409 : 400;
+      const statusCode = result.error === 'NEW_SLOT_UNAVAILABLE' ? 409 : result.error === 'BOOKING_NOT_FOUND' ? 404 : 400;
       return res.status(statusCode).json({
         success: false,
         error: result.error

@@ -1,107 +1,78 @@
 import { Router } from 'express';
 import express from 'express';
 
+/**
+ * ElevenLabs speech proxy. The API key lives only in the server environment
+ * (ELEVENLABS_API_KEY) — it is never accepted from or sent to the browser.
+ * Without a key the frontend uses the browser's built-in speech APIs.
+ */
 const router = Router();
 
-// Endpoint for Speech-to-Text via ElevenLabs Scribe
-router.post('/stt', express.raw({ type: '*/*', limit: '50mb' }), async (req, res) => {
-  console.log(`[STT Route] Received STT request. Headers:`, req.headers);
+const EXTENSIONS: [string, string][] = [['mp4', 'mp4'], ['mpeg', 'mp3'], ['ogg', 'ogg'], ['wav', 'wav'], ['webm', 'webm']];
+
+router.post('/stt', express.raw({ type: '*/*', limit: '10mb' }), async (req, res) => {
+  const apiKey = process.env.ELEVENLABS_API_KEY;
+  if (!apiKey) return res.status(503).json({ success: false, error: 'ELEVENLABS_NOT_CONFIGURED' });
+
+  const audio = req.body;
+  if (!Buffer.isBuffer(audio) || audio.length === 0) {
+    return res.status(400).json({ success: false, error: 'AUDIO_REQUIRED' });
+  }
+
   try {
-    const audioBuffer = req.body;
-    if (!audioBuffer || !Buffer.isBuffer(audioBuffer)) {
-      console.error('[STT Route] Audio buffer missing or invalid.');
-      return res.status(400).json({ success: false, message: 'Audio buffer is required' });
-    }
-    console.log(`[STT Route] Audio buffer size: ${audioBuffer.length} bytes`);
+    const contentType = (req.headers['content-type'] || 'audio/webm').split(';')[0];
+    const ext = EXTENSIONS.find(([needle]) => contentType.includes(needle))?.[1] ?? 'webm';
+    const form = new FormData();
+    form.append('file', new Blob([new Uint8Array(audio)], { type: contentType }), `audio.${ext}`);
+    form.append('model_id', 'scribe_v1');
+    const lang = req.query.language;
+    if (typeof lang === 'string' && /^[a-z]{2,3}$/.test(lang)) form.append('language_code', lang);
 
-    const elevenLabsApiKey = (req.headers['x-api-key'] as string) || process.env.ELEVENLABS_API_KEY;
-    if (!elevenLabsApiKey) {
-      console.error('[STT Route] No ElevenLabs API key in environment or headers.');
-      return res.status(500).json({ success: false, message: 'No ElevenLabs API key provided' });
-    }
-
-    // Convert Buffer to a Blob for FormData
-    const contentType = req.headers['content-type'] || 'audio/webm';
-    console.log(`[STT Route] Using content-type for blob: ${contentType}`);
-    const audioBlob = new Blob([new Uint8Array(audioBuffer)], { type: contentType });
-    
-    let ext = 'webm';
-    if (contentType.includes('mp4')) ext = 'mp4';
-    if (contentType.includes('mpeg')) ext = 'mp3';
-    if (contentType.includes('ogg')) ext = 'ogg';
-    
-    const formData = new FormData();
-    formData.append('file', audioBlob, `audio.${ext}`);
-    formData.append('model_id', 'scribe_v1');
-
-    console.log(`[STT Route] Sending to ElevenLabs api...`);
-    const response = await fetch(`https://api.elevenlabs.io/v1/speech-to-text`, {
+    const response = await fetch('https://api.elevenlabs.io/v1/speech-to-text', {
       method: 'POST',
-      headers: {
-        'xi-api-key': elevenLabsApiKey
-      },
-      body: formData
+      headers: { 'xi-api-key': apiKey },
+      body: form
     });
-
-    console.log(`[STT Route] ElevenLabs API responded with status: ${response.status}`);
     if (!response.ok) {
-      const errText = await response.text();
-      console.error('[STT Route] ElevenLabs STT failed:', response.status, errText);
-      throw new Error(`ElevenLabs API error: ${response.status} ${errText}`);
+      const detail = await response.text();
+      console.error('[voice/stt] ElevenLabs error', response.status, detail.slice(0, 300));
+      return res.status(502).json({ success: false, error: 'STT_UPSTREAM_ERROR', status: response.status });
     }
-
-    const data = await response.json();
-    console.log(`[STT Route] Transcription success: "${data.text}"`);
-    res.json({ success: true, text: data.text });
+    const data = (await response.json()) as { text?: string };
+    res.json({ success: true, text: (data.text || '').trim() });
   } catch (error) {
-    console.error('[STT Route] Error in STT proxy:', error);
-    res.status(500).json({ success: false, message: 'Internal Server Error', error: String(error) });
+    console.error('[voice/stt] failed:', error);
+    res.status(500).json({ success: false, error: 'STT_FAILED' });
   }
 });
 
 router.post('/tts', async (req, res) => {
+  const apiKey = process.env.ELEVENLABS_API_KEY;
+  const text = typeof req.body?.text === 'string' ? req.body.text.slice(0, 1500) : '';
+  if (!text) return res.status(400).json({ success: false, error: 'TEXT_REQUIRED' });
+  if (!apiKey) return res.status(200).json({ success: false, fallback: true, error: 'ELEVENLABS_NOT_CONFIGURED' });
+
   try {
-    const { text } = req.body;
-    if (!text) {
-      return res.status(400).json({ success: false, message: 'Text is required' });
-    }
-
-    const elevenLabsApiKey = (req.headers['x-api-key'] as string) || process.env.ELEVENLABS_API_KEY;
-    const elevenLabsVoiceId = process.env.ELEVENLABS_VOICE_ID || '21m00Tcm4TlvDq8ikWAM';
-
-    if (!elevenLabsApiKey) {
-      // If no API key, gracefully fallback by telling the client to use browser TTS
-      return res.status(200).json({ success: false, fallback: true, message: 'No ElevenLabs API key provided' });
-    }
-
-    const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${elevenLabsVoiceId}`, {
+    const voiceId = process.env.ELEVENLABS_VOICE_ID || '21m00Tcm4TlvDq8ikWAM';
+    const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'xi-api-key': elevenLabsApiKey
-      },
+      headers: { 'Content-Type': 'application/json', 'xi-api-key': apiKey, Accept: 'audio/mpeg' },
       body: JSON.stringify({
         text,
-        model_id: 'eleven_multilingual_v2',
-        voice_settings: {
-          stability: 0.5,
-          similarity_boost: 0.75
-        }
+        // Flash v2.5: ~75ms latency and multilingual — suited to back-and-forth voice chat.
+        model_id: process.env.ELEVENLABS_MODEL_ID || 'eleven_flash_v2_5',
+        voice_settings: { stability: 0.45, similarity_boost: 0.8, speed: 1.05 }
       })
     });
-
     if (!response.ok) {
-      throw new Error(`ElevenLabs API error: ${response.statusText}`);
+      console.error('[voice/tts] ElevenLabs error', response.status);
+      return res.status(200).json({ success: false, fallback: true, error: 'TTS_UPSTREAM_ERROR' });
     }
-
-    const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
     res.set('Content-Type', 'audio/mpeg');
-    res.send(buffer);
+    res.send(Buffer.from(await response.arrayBuffer()));
   } catch (error) {
-    console.error('Error in TTS proxy:', error);
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
+    console.error('[voice/tts] failed:', error);
+    res.status(200).json({ success: false, fallback: true, error: 'TTS_FAILED' });
   }
 });
 

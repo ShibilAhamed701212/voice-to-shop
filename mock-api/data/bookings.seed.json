@@ -1,47 +1,5 @@
 [
   {
-    "booking_id": "AC7448",
-    "customer_id": "C001",
-    "customer_name": "Valued Customer",
-    "provider_id": "AC002",
-    "provider_name": "Arun Services",
-    "service": "AC Repair",
-    "problem": "AC not cooling properly",
-    "date": "2026-09-21",
-    "start_time": "18:00",
-    "end_time": "19:00",
-    "price": 349,
-    "currency": "INR",
-    "status": "confirmed",
-    "created_at": "2026-09-20T11:26:14.977Z",
-    "location": {
-      "pincode": "560064",
-      "area": "Yelahanka",
-      "city": "Bengaluru"
-    }
-  },
-  {
-    "booking_id": "AC3768",
-    "customer_id": "C001",
-    "customer_name": "Valued Customer",
-    "provider_id": "AC001",
-    "provider_name": "Rahul Kumar",
-    "service": "AC Repair",
-    "problem": "AC not cooling properly",
-    "date": "2026-09-21",
-    "start_time": "18:00",
-    "end_time": "19:00",
-    "price": 399,
-    "currency": "INR",
-    "status": "confirmed",
-    "created_at": "2026-09-20T11:26:01.067Z",
-    "location": {
-      "pincode": "560064",
-      "area": "Yelahanka",
-      "city": "Bengaluru"
-    }
-  },
-  {
     "booking_id": "AC4485",
     "customer_id": "C001",
     "customer_name": "Valued Customer",
@@ -70,13 +28,13 @@
     "provider_name": "Rahul Kumar",
     "service": "AC Repair",
     "problem": "AC not cooling properly",
-    "date": "2026-09-21",
+    "date": "2026-09-17",
     "start_time": "18:00",
     "end_time": "19:00",
     "price": 399,
     "currency": "INR",
-    "status": "confirmed",
-    "created_at": "2026-09-20T10:15:00Z",
+    "status": "completed",
+    "created_at": "2026-09-15T10:15:00Z",
     "location": {
       "pincode": "560064",
       "area": "Yelahanka",
@@ -87,8 +45,8 @@
     "booking_id": "PL1022",
     "customer_id": "C002",
     "customer_name": "Vikram Malhotra",
-    "provider_id": "PL004",
-    "provider_name": "Ramesh Waterworks",
+    "provider_id": "PL008",
+    "provider_name": "Manjunath Plumbers",
     "service": "Plumbing",
     "problem": "Kitchen sink water leak",
     "date": "2026-09-20",
@@ -113,15 +71,15 @@
     "service": "AC Repair",
     "problem": "Service checkup for AC Repair",
     "date": "2026-09-21",
-    "start_time": "13:00",
-    "end_time": "14:00",
+    "start_time": "11:00",
+    "end_time": "12:00",
     "price": 399,
     "currency": "INR",
     "status": "rescheduled",
     "created_at": "2026-09-18T10:00:00Z",
     "location": {
-      "pincode": "560076",
-      "area": "BTM Layout",
+      "pincode": "560085",
+      "area": "Banashankari",
       "city": "Bengaluru"
     }
   },
@@ -141,8 +99,8 @@
     "status": "provider_cancelled",
     "created_at": "2026-09-19T10:00:00Z",
     "location": {
-      "pincode": "560066",
-      "area": "Whitefield",
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
       "city": "Bengaluru"
     }
   },
@@ -162,8 +120,8 @@
     "status": "pending",
     "created_at": "2026-09-15T10:00:00Z",
     "location": {
-      "pincode": "560100",
-      "area": "Electronic City",
+      "pincode": "560076",
+      "area": "BTM Layout",
       "city": "Bengaluru"
     }
   },
@@ -176,15 +134,15 @@
     "service": "Plumbing",
     "problem": "Service checkup for Plumbing",
     "date": "2026-09-21",
-    "start_time": "16:00",
-    "end_time": "17:00",
+    "start_time": "15:00",
+    "end_time": "16:00",
     "price": 269,
     "currency": "INR",
     "status": "confirmed",
     "created_at": "2026-09-16T10:00:00Z",
     "location": {
-      "pincode": "560037",
-      "area": "Marathahalli",
+      "pincode": "560085",
+      "area": "Banashankari",
       "city": "Bengaluru"
     }
   },
@@ -204,8 +162,8 @@
     "status": "completed",
     "created_at": "2026-09-17T10:00:00Z",
     "location": {
-      "pincode": "560085",
-      "area": "Banashankari",
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
       "city": "Bengaluru"
     }
   },
@@ -225,8 +183,8 @@
     "status": "cancelled",
     "created_at": "2026-09-18T10:00:00Z",
     "location": {
-      "pincode": "560064",
-      "area": "Yelahanka",
+      "pincode": "560076",
+      "area": "BTM Layout",
       "city": "Bengaluru"
     }
   },
@@ -246,8 +204,8 @@
     "status": "rescheduled",
     "created_at": "2026-09-19T10:00:00Z",
     "location": {
-      "pincode": "560001",
-      "area": "MG Road / Shivajinagar",
+      "pincode": "560100",
+      "area": "Electronic City",
       "city": "Bengaluru"
     }
   },
@@ -267,8 +225,8 @@
     "status": "provider_cancelled",
     "created_at": "2026-09-15T10:00:00Z",
     "location": {
-      "pincode": "560034",
-      "area": "Koramangala",
+      "pincode": "560085",
+      "area": "Banashankari",
       "city": "Bengaluru"
     }
   },
@@ -281,15 +239,15 @@
     "service": "Electrical",
     "problem": "Service checkup for Electrical",
     "date": "2026-09-21",
-    "start_time": "13:00",
-    "end_time": "14:00",
+    "start_time": "11:00",
+    "end_time": "12:00",
     "price": 319,
     "currency": "INR",
     "status": "pending",
     "created_at": "2026-09-16T10:00:00Z",
     "location": {
-      "pincode": "560076",
-      "area": "BTM Layout",
+      "pincode": "560066",
+      "area": "Whitefield",
       "city": "Bengaluru"
     }
   },
@@ -302,15 +260,15 @@
     "service": "Electrical",
     "problem": "Service checkup for Electrical",
     "date": "2026-09-21",
-    "start_time": "14:00",
-    "end_time": "15:00",
+    "start_time": "15:00",
+    "end_time": "16:00",
     "price": 399,
     "currency": "INR",
     "status": "confirmed",
     "created_at": "2026-09-17T10:00:00Z",
     "location": {
-      "pincode": "560066",
-      "area": "Whitefield",
+      "pincode": "560037",
+      "area": "Marathahalli",
       "city": "Bengaluru"
     }
   },
@@ -330,8 +288,8 @@
     "status": "completed",
     "created_at": "2026-09-18T10:00:00Z",
     "location": {
-      "pincode": "560100",
-      "area": "Electronic City",
+      "pincode": "560064",
+      "area": "Yelahanka",
       "city": "Bengaluru"
     }
   },
@@ -351,8 +309,8 @@
     "status": "cancelled",
     "created_at": "2026-09-19T10:00:00Z",
     "location": {
-      "pincode": "560037",
-      "area": "Marathahalli",
+      "pincode": "560034",
+      "area": "Koramangala",
       "city": "Bengaluru"
     }
   },
@@ -365,15 +323,15 @@
     "service": "Electrical",
     "problem": "Service checkup for Electrical",
     "date": "2026-09-21",
-    "start_time": "17:00",
-    "end_time": "18:00",
+    "start_time": "18:00",
+    "end_time": "19:00",
     "price": 369,
     "currency": "INR",
     "status": "rescheduled",
     "created_at": "2026-09-15T10:00:00Z",
     "location": {
-      "pincode": "560085",
-      "area": "Banashankari",
+      "pincode": "560066",
+      "area": "Whitefield",
       "city": "Bengaluru"
     }
   },
@@ -393,8 +351,8 @@
     "status": "provider_cancelled",
     "created_at": "2026-09-16T10:00:00Z",
     "location": {
-      "pincode": "560064",
-      "area": "Yelahanka",
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
       "city": "Bengaluru"
     }
   },
@@ -414,8 +372,8 @@
     "status": "pending",
     "created_at": "2026-09-17T10:00:00Z",
     "location": {
-      "pincode": "560001",
-      "area": "MG Road / Shivajinagar",
+      "pincode": "560076",
+      "area": "BTM Layout",
       "city": "Bengaluru"
     }
   },
@@ -428,15 +386,15 @@
     "service": "Cleaning",
     "problem": "Service checkup for Cleaning",
     "date": "2026-09-21",
-    "start_time": "12:00",
-    "end_time": "13:00",
+    "start_time": "11:00",
+    "end_time": "12:00",
     "price": 969,
     "currency": "INR",
     "status": "confirmed",
     "created_at": "2026-09-18T10:00:00Z",
     "location": {
-      "pincode": "560034",
-      "area": "Koramangala",
+      "pincode": "560100",
+      "area": "Electronic City",
       "city": "Bengaluru"
     }
   },
@@ -456,8 +414,8 @@
     "status": "completed",
     "created_at": "2026-09-19T10:00:00Z",
     "location": {
-      "pincode": "560076",
-      "area": "BTM Layout",
+      "pincode": "560085",
+      "area": "Banashankari",
       "city": "Bengaluru"
     }
   },
@@ -477,8 +435,8 @@
     "status": "cancelled",
     "created_at": "2026-09-15T10:00:00Z",
     "location": {
-      "pincode": "560064",
-      "area": "Yelahanka",
+      "pincode": "560001",
+      "area": "MG Road / Shivajinagar",
       "city": "Bengaluru"
     }
   },
@@ -498,8 +456,8 @@
     "status": "rescheduled",
     "created_at": "2026-09-16T10:00:00Z",
     "location": {
-      "pincode": "560001",
-      "area": "MG Road / Shivajinagar",
+      "pincode": "560037",
+      "area": "Marathahalli",
       "city": "Bengaluru"
     }
   },
@@ -519,8 +477,8 @@
     "status": "provider_cancelled",
     "created_at": "2026-09-17T10:00:00Z",
     "location": {
-      "pincode": "560034",
-      "area": "Koramangala",
+      "pincode": "560064",
+      "area": "Yelahanka",
       "city": "Bengaluru"
     }
   }

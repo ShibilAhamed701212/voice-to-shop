@@ -1,5 +1,6 @@
-import fs from 'fs';
-import path from 'path';
+import { readSeed } from '../lib/store.js';
+import { addDays, isIsoDate, minutesNow, toMinutes, today } from '../lib/time.js';
+import { getState, occupiedKeys, persist, slotKey } from './bookingStore.js';
 
 export interface TimeSlot {
   date: string;
@@ -8,15 +9,16 @@ export interface TimeSlot {
   available: boolean;
 }
 
-export interface Provider {
+export interface ScheduleSlot {
+  start: string;
+  end: string;
+}
+
+export interface ProviderRecord {
   provider_id: string;
   name: string;
   category: string;
-  location: {
-    pincode: string;
-    area: string;
-    city: string;
-  };
+  location: { pincode: string; area: string; city: string };
   rating: number;
   review_count: number;
   experience_years: number;
@@ -25,116 +27,96 @@ export interface Provider {
   eta_minutes: number;
   phone: string;
   services: string[];
-  availability: TimeSlot[];
+  /** Daily working slots; availability is generated from this for a rolling window. */
+  schedule: ScheduleSlot[];
   status: string;
 }
 
-function getDataPath(filename: string): string {
-  const candidates = [
-    path.join(__dirname, '..', '..', 'data', filename),
-    path.join(__dirname, '..', 'data', filename),
-    path.resolve(process.cwd(), 'data', filename),
-    path.resolve(process.cwd(), 'mock-api', 'data', filename)
-  ];
-  for (const p of candidates) {
-    if (fs.existsSync(p)) return p;
-  }
-  return candidates[0];
+export interface Provider extends Omit<ProviderRecord, 'schedule'> {
+  availability: TimeSlot[];
+  /** Best slot for the requested date/time (search results only). */
+  matched_slot?: TimeSlot;
+  /** False when no provider serves the requested PIN code and nearby ones are shown instead. */
+  in_area?: boolean;
 }
 
-const DATA_FILE = getDataPath('providers.json');
-let providersCache: Provider[] = [];
-let seedBackup: Provider[] = [];
+/** How many days ahead customers can book. */
+export const HORIZON_DAYS = 14;
+/** Same-day slots must start at least this far in the future. */
+const LEAD_MINUTES = 60;
 
-function loadProviders(): Provider[] {
-  if (providersCache.length === 0) {
-    if (fs.existsSync(DATA_FILE)) {
-      const raw = fs.readFileSync(DATA_FILE, 'utf-8');
-      seedBackup = JSON.parse(raw);
-      providersCache = JSON.parse(raw);
-    }
-  }
-  return providersCache;
-}
+let catalog: ProviderRecord[] | null = null;
 
-export function saveProviders(): void {
-  if (process.env.NODE_ENV === 'test') return; // Do not overwrite disk during test runs
-  try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(providersCache, null, 2), 'utf-8');
-  } catch (err) {
-    console.error('Error saving providers to disk:', err);
-  }
-}
-
-export function resetProvidersCache(): void {
-  if (seedBackup.length > 0) {
-    providersCache = JSON.parse(JSON.stringify(seedBackup));
-  } else {
-    providersCache = [];
-    loadProviders();
-  }
+export function getCatalog(): ProviderRecord[] {
+  if (!catalog) catalog = readSeed<ProviderRecord[]>('providers.json');
+  return catalog;
 }
 
 export class AvailabilityService {
-  static getProviders(): Provider[] {
-    return loadProviders();
+  static getRecord(providerId: string): ProviderRecord | undefined {
+    const id = providerId.toLowerCase();
+    return getCatalog().find(p => p.provider_id.toLowerCase() === id);
   }
 
-  static getProviderSlots(providerId: string, date?: string): TimeSlot[] {
-    const providers = loadProviders();
-    const provider = providers.find(p => p.provider_id.toLowerCase() === providerId.toLowerCase());
-    if (!provider) return [];
-    if (date) {
-      return provider.availability.filter(slot => slot.date === date);
-    }
-    return provider.availability;
+  static horizonDates(): string[] {
+    const start = today();
+    return Array.from({ length: HORIZON_DAYS }, (_, i) => addDays(start, i));
   }
 
-  static isSlotAvailable(providerId: string, date: string, startTime: string): boolean {
-    const slots = this.getProviderSlots(providerId, date);
-    const targetSlot = slots.find(s => s.start === startTime);
-    return targetSlot ? targetSlot.available : false;
+  static isBookableDate(date: string): boolean {
+    return isIsoDate(date) && this.horizonDates().includes(date);
   }
 
-  static reserveSlot(providerId: string, date: string, startTime: string, endTime?: string): boolean {
-    const providers = loadProviders();
-    const provider = providers.find(p => p.provider_id.toLowerCase() === providerId.toLowerCase());
-    if (!provider) return false;
+  static slotsFor(record: ProviderRecord, date: string, occupied: Set<string> = occupiedKeys()): TimeSlot[] {
+    if (!this.isBookableDate(date)) return [];
+    const isToday = date === today();
+    const cutoff = minutesNow() + LEAD_MINUTES;
+    return record.schedule.map(s => ({
+      date,
+      start: s.start,
+      end: s.end,
+      available:
+        !occupied.has(slotKey(record.provider_id, date, s.start)) && !(isToday && toMinutes(s.start) < cutoff)
+    }));
+  }
 
-    let slot = provider.availability.find(s => s.date === date && s.start === startTime);
-    if (!slot) {
-      // If slot not explicitly listed, create it as booked if valid time
-      slot = {
-        date,
-        start: startTime,
-        end: endTime || `${parseInt(startTime.split(':')[0]) + 1}:00`,
-        available: false
-      };
-      provider.availability.push(slot);
-      saveProviders();
-      return true;
-    }
+  static toProvider(record: ProviderRecord, dates: string[], occupied: Set<string> = occupiedKeys()): Provider {
+    const { schedule: _schedule, ...rest } = record;
+    return { ...rest, availability: dates.flatMap(d => this.slotsFor(record, d, occupied)) };
+  }
 
-    if (!slot.available) {
-      return false; // Already booked!
-    }
+  static getProviderSlots(providerId: string, date?: string, excludeBookingId?: string): TimeSlot[] {
+    const record = this.getRecord(providerId);
+    if (!record) return [];
+    const occupied = occupiedKeys(excludeBookingId);
+    const dates = date ? [date] : this.horizonDates();
+    return dates.flatMap(d => this.slotsFor(record, d, occupied));
+  }
 
-    slot.available = false;
-    saveProviders();
+  static findSlot(providerId: string, date: string, startTime: string, excludeBookingId?: string): TimeSlot | undefined {
+    return this.getProviderSlots(providerId, date, excludeBookingId).find(s => s.start === startTime);
+  }
+
+  static isSlotAvailable(providerId: string, date: string, startTime: string, excludeBookingId?: string): boolean {
+    return this.findSlot(providerId, date, startTime, excludeBookingId)?.available ?? false;
+  }
+
+  /** Manually blocks a free slot. Returns false if it doesn't exist or is already taken. */
+  static reserveSlot(providerId: string, date: string, startTime: string): boolean {
+    if (!this.isSlotAvailable(providerId, date, startTime)) return false;
+    getState().blocks.push(slotKey(providerId, date, startTime));
+    persist();
     return true;
   }
 
+  /** Removes a manual block. Slots held by bookings are released by cancelling the booking. */
   static releaseSlot(providerId: string, date: string, startTime: string): boolean {
-    const providers = loadProviders();
-    const provider = providers.find(p => p.provider_id.toLowerCase() === providerId.toLowerCase());
-    if (!provider) return false;
-
-    const slot = provider.availability.find(s => s.date === date && s.start === startTime);
-    if (slot) {
-      slot.available = true;
-      saveProviders();
-      return true;
-    }
-    return false;
+    const state = getState();
+    const key = slotKey(providerId, date, startTime);
+    const before = state.blocks.length;
+    state.blocks = state.blocks.filter(k => k !== key);
+    if (state.blocks.length === before) return false;
+    persist();
+    return true;
   }
 }
