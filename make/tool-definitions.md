@@ -252,6 +252,8 @@ Reschedules a booking to a new date/time slot, validating slot availability.
 ## 8. `send_notification`
 Dispatches an SMS/Email/WhatsApp notification to customer and provider upon booking actions.
 
+> The mock API has no notification endpoint. Implement this tool inside Make (for example with an SMS, email or WhatsApp module), or leave it out.
+
 ```json
 {
   "name": "send_notification",

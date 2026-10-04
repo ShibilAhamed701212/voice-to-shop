@@ -72,13 +72,14 @@ Then try "reschedule it to Wednesday morning", "cancel my booking" or "what are 
 | `APP_TIMEZONE` | Sets what "today" means and the booking window. Default `Asia/Kolkata`. |
 | `DATA_DIR` | Where runtime bookings are stored. Default `mock-api/data/runtime/`. |
 | `ALLOW_RESET` | Allows `POST /api/admin/reset` in production. |
+| `CORS_ORIGIN` | Comma-separated list of allowed origins. Default `*`. |
 
 ## Scripts
 
 | Command | What it does |
 | --- | --- |
 | `npm run dev` | API (tsx watch) + Vite dev server with an `/api` proxy |
-| `npm test` | 55 tests: API, booking concurrency, offline agent, Claude agent (mocked) and language parsing |
+| `npm test` | 58 tests: API, booking concurrency, input validation, offline agent, Claude agent (mocked) and language parsing. Needs Node 22.12+ |
 | `npm run typecheck` | TypeScript checks for both packages |
 | `npm run build && npm start` | Production build; Express serves the app and API on :8000 |
 | `docker compose up --build` | Same thing in a single container on :8000 |
@@ -99,10 +100,20 @@ Reply {text, stage, state, options, proposal, booking, suggestions}
    ─► React cards + text-to-speech
 ```
 
+GitHub Actions (`.github/workflows/ci.yml`) runs the typecheck and build on Node 20 and 22, and the tests on Node 22, for every push to `main` and every pull request.
+
+## Fixes from the October 2026 audit
+
+- `PATCH /api/bookings/:id` could set any status, including putting a cancelled booking back to `confirmed`. If someone else had booked the freed slot in the meantime, two active bookings held the same slot. PATCH now only marks an active booking `completed`; cancelling and rescheduling go through their own endpoints, which check the slot.
+- PATCH also stored non-string values (for example an object as `customer_name`). Text fields are now validated.
+- A repeated query parameter (`?pincode=1&pincode=2`) or a non-string JSON field made several endpoints crash with a `500` that echoed an internal error message. They now return `400 INVALID_PARAMETERS`.
+- `render.yaml` now declares `ANTHROPIC_API_KEY`, so the Claude agent can be configured from the Render dashboard.
+- Added CI, and documented the PATCH and slot-blocking endpoints in [docs/api.md](docs/api.md).
+
 ## Limitations
 
 - **Demo data, not a real marketplace.** There are 44 fictional providers in 8 Bengaluru PIN codes, with hourly slots and flat visit prices. There are no payments, SMS or email notifications, and no real provider app.
-- **No authentication.** The customer is chosen from demo profiles in Settings. Anyone who can open the app can view, cancel or reset bookings. CORS is open and there is no rate limiting. Harden all of this before any real deployment.
+- **No authentication.** The customer is chosen from demo profiles in Settings. Anyone who can open the app can view, cancel or reset bookings. CORS is open unless `CORS_ORIGIN` is set, and there is no rate limiting. Harden all of this before any real deployment.
 - **Simple storage.** Bookings live in one JSON file served by a single Node process. The no-double-booking guarantee holds for one server instance only; multiple instances would need a real database with transactions. Render's free tier has an ephemeral disk, so bookings reset on each deploy.
 - **The offline agent is rule-based.** It covers common booking phrasing in English and Hinglish but can misread unusual sentences. It always replies in English, even when it understands Hindi or Kannada input.
 - **The Claude agent needs an API key and costs money per conversation.** Its conversation history lives in server memory and is lost on restart. It has been tested with a simulated API in the automated tests; verify it against the live API once your key is in place.

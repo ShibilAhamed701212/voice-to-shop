@@ -2,12 +2,15 @@ import { Router, Request, Response } from 'express';
 import { BookingService } from '../services/bookingService.js';
 import { ProviderService } from '../services/providerService.js';
 import { isIsoDate } from '../lib/time.js';
+import { invalidFieldsBody, nonStringFields } from '../lib/validate.js';
 
 const router = Router();
 
 // GET /api/bookings
 router.get('/', (req: Request, res: Response) => {
   try {
+    const invalid = nonStringFields(req.query, ['customer_id', 'status']);
+    if (invalid.length) return res.status(400).json(invalidFieldsBody(invalid));
     const list = BookingService.getAll();
     const customerId = (req.query.customer_id as string | undefined)?.toLowerCase();
     const status = req.query.status as string | undefined;
@@ -41,6 +44,8 @@ router.get('/:id', (req: Request, res: Response) => {
 router.post('/', (req: Request, res: Response) => {
   try {
     const { customer_id, provider_id, service, problem, date, start_time, customer_name } = req.body ?? {};
+    const invalid = nonStringFields(req.body, ['customer_id', 'provider_id', 'service', 'problem', 'date', 'start_time', 'customer_name']);
+    if (invalid.length) return res.status(400).json(invalidFieldsBody(invalid));
 
     if (!customer_id || !provider_id || !date || !start_time) {
       return res.status(400).json({
@@ -97,11 +102,12 @@ router.post('/', (req: Request, res: Response) => {
 // PATCH /api/bookings/:id
 router.patch('/:id', (req: Request, res: Response) => {
   try {
-    const updated = BookingService.update(req.params.id as string, req.body ?? {});
-    if (!updated) {
-      return res.status(404).json({ success: false, error: 'BOOKING_NOT_FOUND' });
+    const body = req.body && typeof req.body === 'object' ? req.body : {};
+    const result = BookingService.update(req.params.id as string, body);
+    if (!result.success) {
+      return res.status(result.error === 'BOOKING_NOT_FOUND' ? 404 : 400).json({ success: false, error: result.error });
     }
-    res.json({ success: true, booking: updated });
+    res.json({ success: true, booking: result.booking });
   } catch (err: any) {
     res.status(500).json({ success: false, error: err.message });
   }
@@ -111,6 +117,8 @@ router.patch('/:id', (req: Request, res: Response) => {
 router.post('/:id/cancel', (req: Request, res: Response) => {
   try {
     const { reason } = req.body ?? {};
+    const invalid = nonStringFields(req.body, ['reason']);
+    if (invalid.length) return res.status(400).json(invalidFieldsBody(invalid));
     const result = BookingService.cancel(req.params.id as string, reason);
     if (!result.success) {
       return res.status(400).json({ success: false, error: result.error });
@@ -129,6 +137,8 @@ router.post('/:id/cancel', (req: Request, res: Response) => {
 router.post('/:id/reschedule', (req: Request, res: Response) => {
   try {
     const { date, start_time } = req.body ?? {};
+    const invalid = nonStringFields(req.body, ['date', 'start_time']);
+    if (invalid.length) return res.status(400).json(invalidFieldsBody(invalid));
     if (!date || !start_time) {
       return res.status(400).json({
         success: false,

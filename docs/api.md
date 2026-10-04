@@ -160,6 +160,15 @@ Inspects real-time slot availability for a provider.
 }
 ```
 
+### `POST /api/providers/:id/availability` (also `PATCH`)
+Manually blocks a free slot (for example, a provider marking themselves busy) or removes a block.
+
+```json
+{ "date": "2026-09-23", "start_time": "10:00", "available": false }
+```
+
+`available: false` blocks the slot and returns `409 SLOT_UNAVAILABLE` if it is already taken or not on the schedule. Any other value removes a manual block. Slots held by bookings are released only by cancelling the booking. The response is the provider's slots for that date.
+
 ---
 
 ## 3. Booking Endpoints
@@ -282,6 +291,20 @@ Reschedules a booking to a new date and time.
 }
 ```
 
+A slot that is taken or not on the schedule returns `409 NEW_SLOT_UNAVAILABLE`. Cancelled and completed bookings return `400 BOOKING_NOT_ACTIVE`.
+
+---
+
+### `PATCH /api/bookings/:id`
+Edits the booking's notes or marks it completed.
+
+```json
+{ "problem": "AC not cooling, makes a rattling noise", "customer_name": "Ananya Sharma", "status": "completed" }
+```
+
+- `problem` and `customer_name` must be strings of at most 500 characters (`400 INVALID_FIELD` otherwise).
+- `status` may only be set to `completed`, and only on an active booking. Anything else returns `400 INVALID_STATUS_CHANGE`. Cancel with `/cancel` and change the slot with `/reschedule`. A cancelled booking can't be re-activated, because its slot may have been booked by someone else since.
+- Other fields (provider, date, time, price) are ignored.
 
 ---
 
@@ -295,7 +318,7 @@ One conversation turn.
   "action": { "type": "select", "provider_id": "AC001", "date": "2026-10-05", "start_time": "18:00" } }
 ```
 
-- `mode`: `local` (built-in agent) or `make` (forwards to `MAKE_WEBHOOK_URL`, falling back to local with `fallback: true` and a `notice`).
+- `mode`: `auto` (default: the Claude agent when `ANTHROPIC_API_KEY` is set, otherwise the offline agent), `claude`, `local` (offline agent) or `make` (forwards to `MAKE_WEBHOOK_URL`). When Claude or Make fails or isn't configured, the offline agent answers and the reply carries `fallback: true` and a `notice`.
 - `action` (optional) carries structured UI intents: `select`, `confirm`, `decline`, `cancel_booking`, `reschedule_booking` or `reset`.
 
 Response:
@@ -315,7 +338,7 @@ Response:
 `stage` is one of `gathering`, `options`, `confirming`, `booked`, `confirm_cancel`, `reschedule_ask` or `confirm_reschedule`. `POST /api/make-simulator` is kept as an alias that always uses the built-in agent.
 
 ### `GET /api/config`
-Returns `{ today, timezone, horizon_days, make_webhook_configured, elevenlabs_configured }`. Secret values are never included.
+Returns `{ today, timezone, horizon_days, claude_configured, claude_model, make_webhook_configured, elevenlabs_configured }`. Secret values are never included.
 
 ### `GET /api/meta`
 Returns the categories (count, min price) and service areas (PIN code, area) used for filters.
@@ -333,3 +356,4 @@ ElevenLabs proxy. STT takes raw audio (`Content-Type: audio/webm|mp4|ogg`) and r
 - Slots are generated for a rolling 14-day window from each provider's daily `schedule`. Same-day slots need 1 hour of lead time.
 - `POST /api/bookings` accepts only slots on the provider's schedule. The price always comes from the provider record, so a client-supplied `price` is ignored.
 - A taken slot returns `409 SLOT_UNAVAILABLE` together with up to 3 `alternatives`.
+- Text parameters (query strings and JSON fields such as `provider_id`, `date`, `start_time`, `pincode`) must be strings. A repeated query parameter or a non-string JSON value returns `400 INVALID_PARAMETERS`.

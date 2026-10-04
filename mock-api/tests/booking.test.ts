@@ -1,7 +1,8 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import request from 'supertest';
 import app from '../src/server.js';
-import { resetStore } from '../src/services/bookingStore.js';
+import { ACTIVE_STATUSES, resetStore } from '../src/services/bookingStore.js';
+import { BookingService } from '../src/services/bookingService.js';
 
 describe('Booking API & availability lifecycle', () => {
   let createdBookingId = '';
@@ -96,6 +97,53 @@ describe('Booking API & availability lifecycle', () => {
     expect(res.body.booking.problem).toBe('Updated note');
     expect(res.body.booking.price).not.toBe(1);
     expect(res.body.booking.provider_id).toBe('AC006');
+  });
+
+  it('PATCH cannot re-activate a cancelled booking into a slot someone else took', async () => {
+    const first = await request(app).post('/api/bookings').send({ customer_id: 'C001', provider_id: 'AC003', date: '2026-09-24', start_time: '19:30' });
+    expect(first.status).toBe(201);
+    await request(app).post(`/api/bookings/${first.body.booking_id}/cancel`).send({});
+    const second = await request(app).post('/api/bookings').send({ customer_id: 'C002', provider_id: 'AC003', date: '2026-09-24', start_time: '19:30' });
+    expect(second.status).toBe(201);
+
+    const revive = await request(app).patch(`/api/bookings/${first.body.booking_id}`).send({ status: 'confirmed' });
+    expect(revive.status).toBe(400);
+    expect(revive.body.error).toBe('INVALID_STATUS_CHANGE');
+    const active = BookingService.getAll().filter(
+      b => b.provider_id === 'AC003' && b.date === '2026-09-24' && b.start_time === '19:30' && ACTIVE_STATUSES.includes(b.status)
+    );
+    expect(active).toHaveLength(1);
+  });
+
+  it('PATCH rejects unknown statuses and non-string fields, but allows marking completed', async () => {
+    const bogus = await request(app).patch('/api/bookings/AC1435').send({ status: 'bogus' });
+    expect(bogus.status).toBe(400);
+    const objName = await request(app).patch('/api/bookings/AC1435').send({ customer_name: { x: 1 } });
+    expect(objName.status).toBe(400);
+    expect(objName.body.error).toBe('INVALID_FIELD');
+    expect(BookingService.getById('AC1435')!.status).not.toBe('bogus');
+
+    const done = await request(app).patch('/api/bookings/AC1435').send({ status: 'completed' });
+    expect(done.status).toBe(200);
+    expect(done.body.booking.status).toBe('completed');
+    const again = await request(app).patch('/api/bookings/AC1435').send({ status: 'completed' });
+    expect(again.body.error).toBe('INVALID_STATUS_CHANGE');
+    const missing = await request(app).patch('/api/bookings/NOPE').send({ problem: 'x' });
+    expect(missing.status).toBe(404);
+  });
+
+  it('non-string parameters return 400 instead of a 500 with an internal message', async () => {
+    const body = await request(app).post('/api/bookings').send({ customer_id: 'C001', provider_id: ['AC001'], date: '2026-09-22', start_time: '11:00' });
+    expect(body.status).toBe(400);
+    expect(body.body.error).toBe('INVALID_PARAMETERS');
+    const list = await request(app).get('/api/bookings?customer_id=a&customer_id=b');
+    expect(list.status).toBe(400);
+    const providers = await request(app).get('/api/providers?pincode=1&pincode=2');
+    expect(providers.status).toBe(400);
+    const search = await request(app).post('/api/providers/search').send({ problem: 3 });
+    expect(search.status).toBe(400);
+    const nullReason = await request(app).post('/api/bookings/AC1435/cancel').send({ reason: null });
+    expect(nullReason.status).toBe(400);
   });
 
   it('malformed JSON returns a JSON 400', async () => {
