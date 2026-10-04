@@ -21,33 +21,21 @@
       "AC Maintenance",
       "AC Gas Refill"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "AC002",
@@ -70,27 +58,25 @@
       "AC Not Cooling",
       "AC Installation"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "20:00",
-        "end": "21:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "14:00",
-        "end": "15:00",
-        "available": true
+        "end": "15:00"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
+      },
+      {
+        "start": "20:00",
+        "end": "21:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "AC003",
@@ -114,27 +100,17 @@
       "AC Maintenance",
       "Duct Cleaning"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "18:00",
-        "end": "19:00",
-        "available": false
+        "end": "19:00"
       },
       {
-        "date": "2026-09-21",
         "start": "19:30",
-        "end": "20:30",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "20:30"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "AC004",
@@ -159,51 +135,33 @@
       "AC Maintenance",
       "AC Installation"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "AC005",
@@ -228,51 +186,33 @@
       "AC Maintenance",
       "AC Installation"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "AC006",
@@ -297,51 +237,33 @@
       "AC Maintenance",
       "AC Installation"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "PL007",
@@ -366,51 +288,33 @@
       "Bathroom Fitting",
       "Drain Cleaning"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "PL008",
@@ -435,51 +339,33 @@
       "Bathroom Fitting",
       "Drain Cleaning"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "PL009",
@@ -504,51 +390,33 @@
       "Bathroom Fitting",
       "Drain Cleaning"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "PL010",
@@ -573,51 +441,33 @@
       "Bathroom Fitting",
       "Drain Cleaning"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "PL011",
@@ -642,51 +492,33 @@
       "Bathroom Fitting",
       "Drain Cleaning"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "EL012",
@@ -711,51 +543,33 @@
       "Switchboard Replacement",
       "Inverter Wiring"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "EL013",
@@ -780,51 +594,33 @@
       "Switchboard Replacement",
       "Inverter Wiring"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "EL014",
@@ -849,51 +645,33 @@
       "Switchboard Replacement",
       "Inverter Wiring"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "EL015",
@@ -918,51 +696,33 @@
       "Switchboard Replacement",
       "Inverter Wiring"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "EL016",
@@ -987,51 +747,33 @@
       "Switchboard Replacement",
       "Inverter Wiring"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "CL017",
@@ -1056,51 +798,33 @@
       "Sofa Shampooing",
       "Full House Clean"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "CL018",
@@ -1125,51 +849,33 @@
       "Sofa Shampooing",
       "Full House Clean"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "CL019",
@@ -1194,51 +900,33 @@
       "Sofa Shampooing",
       "Full House Clean"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "CL020",
@@ -1263,51 +951,33 @@
       "Sofa Shampooing",
       "Full House Clean"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "CL021",
@@ -1332,51 +1002,33 @@
       "Sofa Shampooing",
       "Full House Clean"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "WM022",
@@ -1401,51 +1053,33 @@
       "Motor Repair",
       "PCB Board Repair"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "WM023",
@@ -1470,51 +1104,33 @@
       "Motor Repair",
       "PCB Board Repair"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "WM024",
@@ -1539,51 +1155,33 @@
       "Motor Repair",
       "PCB Board Repair"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "WM025",
@@ -1608,51 +1206,33 @@
       "Motor Repair",
       "PCB Board Repair"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "WM026",
@@ -1677,51 +1257,33 @@
       "Motor Repair",
       "PCB Board Repair"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "RF027",
@@ -1746,51 +1308,33 @@
       "Thermostat Fix",
       "Gas Leakage"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "RF028",
@@ -1815,51 +1359,33 @@
       "Thermostat Fix",
       "Gas Leakage"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "RF029",
@@ -1884,51 +1410,33 @@
       "Thermostat Fix",
       "Gas Leakage"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "RF030",
@@ -1953,51 +1461,33 @@
       "Thermostat Fix",
       "Gas Leakage"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "RF031",
@@ -2022,51 +1512,33 @@
       "Thermostat Fix",
       "Gas Leakage"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "TV032",
@@ -2091,51 +1563,33 @@
       "Wall Mount Setup",
       "Motherboard Repair"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "TV033",
@@ -2160,51 +1614,33 @@
       "Wall Mount Setup",
       "Motherboard Repair"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "TV034",
@@ -2229,51 +1665,33 @@
       "Wall Mount Setup",
       "Motherboard Repair"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "TV035",
@@ -2298,51 +1716,33 @@
       "Wall Mount Setup",
       "Motherboard Repair"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "TV036",
@@ -2367,51 +1767,33 @@
       "Wall Mount Setup",
       "Motherboard Repair"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "CP037",
@@ -2436,51 +1818,33 @@
       "Cabinet Hinge Repair",
       "Custom Shelving"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "CP038",
@@ -2505,51 +1869,33 @@
       "Cabinet Hinge Repair",
       "Custom Shelving"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "CP039",
@@ -2574,51 +1920,33 @@
       "Cabinet Hinge Repair",
       "Custom Shelving"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "CP040",
@@ -2643,51 +1971,33 @@
       "Cabinet Hinge Repair",
       "Custom Shelving"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": false
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "CP041",
@@ -2712,51 +2022,33 @@
       "Cabinet Hinge Repair",
       "Custom Shelving"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "09:00",
-        "end": "10:00",
-        "available": true
+        "end": "10:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "11:00",
-        "end": "12:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "15:00",
-        "end": "16:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-21",
-        "start": "19:00",
-        "end": "20:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-22",
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "15:00",
+        "end": "16:00"
+      },
+      {
         "start": "18:00",
-        "end": "19:00",
-        "available": true
+        "end": "19:00"
+      },
+      {
+        "start": "19:00",
+        "end": "20:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "PL042",
@@ -2781,27 +2073,21 @@
       "Bathroom Fitting",
       "Drain Cleaning"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "16:00",
-        "end": "17:00",
-        "available": true
+        "end": "17:00"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "EL043",
@@ -2826,27 +2112,21 @@
       "Switchboard Replacement",
       "Inverter Wiring"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "16:00",
-        "end": "17:00",
-        "available": true
+        "end": "17:00"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00"
       }
-    ],
-    "status": "active"
+    ]
   },
   {
     "provider_id": "CL044",
@@ -2871,26 +2151,20 @@
       "Sofa Shampooing",
       "Full House Clean"
     ],
-    "availability": [
+    "status": "active",
+    "schedule": [
       {
-        "date": "2026-09-21",
         "start": "10:00",
-        "end": "11:00",
-        "available": true
+        "end": "11:00"
       },
       {
-        "date": "2026-09-21",
-        "start": "18:00",
-        "end": "19:00",
-        "available": true
-      },
-      {
-        "date": "2026-09-22",
         "start": "16:00",
-        "end": "17:00",
-        "available": true
+        "end": "17:00"
+      },
+      {
+        "start": "18:00",
+        "end": "19:00"
       }
-    ],
-    "status": "active"
+    ]
   }
 ]

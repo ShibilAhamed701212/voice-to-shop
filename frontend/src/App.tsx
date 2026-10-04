@@ -1,250 +1,190 @@
-import { useState, useEffect } from 'react';
-import { Header } from './components/Header';
-import { VoiceController } from './components/VoiceController';
-import { ConversationFeed } from './components/ConversationFeed';
-import { BookingModal } from './components/BookingModal';
-import { SettingsModal } from './components/SettingsModal';
-import { voiceService } from './services/voiceService';
-import { makeService } from './services/makeService';
-import { checkHealth } from './services/api';
-import { Message, ConversationState, Provider, Booking } from './types';
+import { useCallback, useEffect, useState } from 'react';
+import type { Booking, Customer, Meta, ServerConfig } from './types';
+import { api, errorMessage } from './lib/api';
+import { localToday, setReferenceToday } from './lib/format';
+import { useSettings } from './lib/settings';
+import { useAssistant } from './hooks/useAssistant';
+import { TopBar, View } from './components/TopBar';
+import { BookingPass } from './components/BookingPass';
+import { SettingsDrawer } from './components/SettingsDrawer';
+import { Toasts, useToasts } from './components/Toasts';
+import { AssistantView } from './views/AssistantView';
+import { BookingsView } from './views/BookingsView';
+import { ProvidersView } from './views/ProvidersView';
 
-export function App() {
-  const [sessionId, setSessionId] = useState<string>(makeService.getSessionId());
-  const [isApiOnline, setIsApiOnline] = useState<boolean>(false);
-  const [useSimulator, setUseSimulator] = useState<boolean>(false);
-  const [webhookUrl, setWebhookUrl] = useState<string>('https://hook.eu1.make.com/d7tmacjwxzhxxrwqvo2nm71ozki238na');
+const VIEWS: View[] = ['assistant', 'bookings', 'pros'];
+const viewFromHash = (): View => {
+  const v = window.location.hash.replace('#', '') as View;
+  return VIEWS.includes(v) ? v : 'assistant';
+};
 
-  const [isRecording, setIsRecording] = useState<boolean>(false);
-  const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [liveTranscript, setLiveTranscript] = useState<string>('');
-  const [analyserNode, setAnalyserNode] = useState<AnalyserNode | null>(null);
+export default function App() {
+  const [settings, updateSettings] = useSettings();
+  const { toasts, notify, dismiss } = useToasts();
+  const [view, setView] = useState<View>(viewFromHash);
+  const [config, setConfig] = useState<ServerConfig | null>(null);
+  const [meta, setMeta] = useState<Meta | null>(null);
+  const [customers, setCustomers] = useState<Customer[]>([]);
+  const [online, setOnline] = useState<boolean | null>(null);
+  const [pass, setPass] = useState<Booking | null>(null);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [version, setVersion] = useState(0);
+  const [upcoming, setUpcoming] = useState(0);
 
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 'init-1',
-      sender: 'agent',
-      text: "Hello! I am your AI home-service booking assistant. Describe your problem, like 'My AC is not cooling' or 'Kitchen tap is leaking', and I'll find and book the best verified technician for you.",
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }
-  ]);
+  const customer = customers.find(c => c.customer_id === settings.customerId);
+  const bump = useCallback(() => setVersion(v => v + 1), []);
 
-  const [currentState, setCurrentState] = useState<ConversationState>({
-    service: null,
-    problem: null,
-    pincode: null,
-    date: null,
-    time: null
-  });
-
-  const [selectedProviderId, setSelectedProviderId] = useState<string | null>(null);
-  const [latestBooking, setLatestBooking] = useState<Booking | null>(null);
-  const [showBookingModal, setShowBookingModal] = useState<boolean>(false);
-  const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
-
-  // Periodic health check of the mock API
+  // Bootstrap + health polling.
   useEffect(() => {
-    const pingApi = async () => {
-      const health = await checkHealth();
-      setIsApiOnline(health.status === 'ok');
-    };
-    pingApi();
-    const interval = setInterval(pingApi, 10000);
-    return () => clearInterval(interval);
+    const load = () =>
+      api
+        .config()
+        .then(c => {
+          setReferenceToday(c.today);
+          setConfig(c);
+          setOnline(true);
+        })
+        .catch(() => setOnline(false));
+    load();
+    api.meta().then(setMeta).catch(() => {});
+    api.customers().then(setCustomers).catch(() => {});
+    const id = setInterval(() => api.health().then(() => setOnline(true)).catch(() => setOnline(false)), 15000);
+    return () => clearInterval(id);
   }, []);
 
-  // Handle Voice Recording Toggle
-  const handleToggleRecord = async () => {
-    if (isRecording) {
-      // Stop Recording
-      setIsRecording(false);
-      setAnalyserNode(null);
-      const audioBlob = await voiceService.stopRecording();
-      
-      if (audioBlob && audioBlob.size > 0) {
-        setLiveTranscript('Transcribing...');
-        const result = await voiceService.sendAudio(audioBlob);
-        if (result.success && result.text) {
-          setLiveTranscript(result.text);
-          await handleSendUserMessage(result.text);
-        } else {
-          setLiveTranscript(result.text || 'Failed to transcribe audio.');
-        }
-      }
-      setTimeout(() => setLiveTranscript(''), 2000);
-    } else {
-      // Start Recording
-      try {
-        setLiveTranscript('Listening...');
-        await voiceService.startRecording(
-          () => {
-            // No longer used for real-time STT
-          },
-          (analyser) => {
-            setAnalyserNode(analyser);
-          }
-        );
-        setIsRecording(true);
-      } catch (err) {
-        // Error is handled inside voiceService
-      }
-    }
+  useEffect(() => {
+    if (online && !config)
+      api.config().then(c => {
+        setReferenceToday(c.today);
+        setConfig(c);
+      }).catch(() => {});
+    if (online && !meta) api.meta().then(setMeta).catch(() => {});
+    if (online && !customers.length) api.customers().then(setCustomers).catch(() => {});
+  }, [online, config, meta, customers.length]);
+
+  useEffect(() => {
+    const today = localToday();
+    api
+      .bookings(settings.customerId)
+      .then(list => setUpcoming(list.filter(b => ['pending', 'confirmed', 'rescheduled'].includes(b.status) && b.date >= today).length))
+      .catch(() => {});
+  }, [settings.customerId, version, config]);
+
+  useEffect(() => {
+    const onHash = () => setView(viewFromHash());
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  const go = (v: View) => {
+    window.location.hash = v === 'assistant' ? '' : v;
+    setView(v);
   };
 
-  // Dispatch message to Make.com Webhook (or local simulator)
-  const handleSendUserMessage = async (text: string) => {
-    if (!text || isProcessing) return;
+  const assistant = useAssistant({
+    settings,
+    config,
+    customerFirstName: customer?.name.split(' ')[0],
+    notify,
+    onBooking: b => {
+      bump();
+      if (b.status === 'cancelled') notify(`Booking ${b.booking_id} cancelled`, 'success');
+      else {
+        notify(b.status === 'rescheduled' ? `Booking ${b.booking_id} moved` : `Booked! ID ${b.booking_id}`, 'success');
+        setPass(b);
+      }
+    }
+  });
 
-    const userMessage: Message = {
-      id: `usr-${Date.now()}`,
-      sender: 'user',
-      text,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  // Space toggles the mic, Escape cancels listening — unless typing in a field.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const el = e.target as HTMLElement;
+      const typing = el.closest('input, textarea, select, [contenteditable="true"], [role="dialog"]');
+      if (view !== 'assistant' || typing || pass || settingsOpen) return;
+      if (e.code === 'Space' && !e.repeat && !el.closest('button')) {
+        e.preventDefault();
+        assistant.toggleListening();
+      } else if (e.key === 'Escape') {
+        assistant.cancelListening();
+        assistant.stopSpeaking();
+      }
     };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [view, assistant, pass, settingsOpen]);
 
-    setMessages((prev) => [...prev, userMessage]);
-    setIsProcessing(true);
-
+  const resetData = async () => {
+    if (!window.confirm('Restore the original demo providers and bookings? Bookings you made will be removed.')) return;
     try {
-      const response = await makeService.sendMessage(text, useSimulator);
-
-      if (response.state) {
-        setCurrentState((prev) => ({
-          ...prev,
-          ...response.state
-        }));
-      }
-
-      if (response.booking) {
-        setLatestBooking(response.booking);
-        setShowBookingModal(true);
-      }
-
-      const agentMessage: Message = {
-        id: `agt-${Date.now()}`,
-        sender: 'agent',
-        text: response.text,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        state: response.state,
-        options: response.options,
-        booking: response.booking
-      };
-
-      setMessages((prev) => [...prev, agentMessage]);
-
-      // Vocalize response through Text-to-Speech
-      await voiceService.speak(response.text);
-    } catch (err: any) {
-      console.error('Failed to communicate with service agent:', err);
-      // Display the pipeline error directly in the chat feed
-      const errorMessage: Message = {
-        id: `err-${Date.now()}`,
-        sender: 'agent',
-        text: `\u26A0\uFE0F ${err.message}`, // Warning icon
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-      setMessages((prev) => [...prev, errorMessage]);
-      
-      // Fallback vocalization of the error
-      await voiceService.speak("The Make Webhook pipeline is broken. Please check the logs.");
-    } finally {
-      setIsProcessing(false);
+      await api.resetDemo();
+      assistant.reset();
+      bump();
+      notify('Demo data restored', 'success');
+    } catch (err) {
+      notify(errorMessage(err), 'error');
     }
   };
 
-  // Provider selected in card (Triggers pre-booking intent with the agent)
-  const handleSelectProvider = async (provider: Provider) => {
-    setSelectedProviderId(provider.provider_id);
-    await handleSendUserMessage(`I would like to select ${provider.name} at ₹${provider.price}`);
-  };
-
-  // Reset Session
-  const handleResetSession = () => {
-    makeService.resetSession();
-    setSessionId(makeService.getSessionId());
-    setCurrentState({
-      service: null,
-      problem: null,
-      pincode: null,
-      date: null,
-      time: null
-    });
-    setSelectedProviderId(null);
-    setLatestBooking(null);
-    setMessages([
-      {
-        id: `init-${Date.now()}`,
-        sender: 'agent',
-        text: "New session started! How can I assist you with your home services today?",
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      }
-    ]);
-  };
-
-  const handleSaveWebhookUrl = (url: string) => {
-    setWebhookUrl(url);
-    makeService.setWebhookUrl(url);
-    if (!url) {
-      setUseSimulator(true);
-    }
-  };
+  const usesClaude = settings.agentMode === 'claude' || (settings.agentMode === 'auto' && config?.claude_configured);
+  const agentLabel = settings.agentMode === 'make' ? 'Make.com agent' : usesClaude ? 'Claude AI agent' : 'Offline agent';
 
   return (
-    <div className="app-layout">
-      {/* Top Header */}
-      <Header
-        sessionId={sessionId}
-        isApiOnline={isApiOnline}
-        useSimulator={useSimulator}
-        onToggleSimulator={() => setUseSimulator((prev) => !prev)}
-        onResetSession={handleResetSession}
-        onOpenSettings={() => setShowSettingsModal(true)}
+    <div className={`app view-${view}`}>
+      <TopBar
+        view={view}
+        onView={go}
+        online={online}
+        agentLabel={agentLabel}
+        theme={settings.theme}
+        onTheme={theme => updateSettings({ theme })}
+        onSettings={() => setSettingsOpen(true)}
+        upcoming={upcoming}
       />
 
-      {/* Main Split Content */}
-      <main className="main-content">
-        <div className="left-pane">
-          <ConversationFeed
-            messages={messages}
-            currentState={currentState}
-            onSelectProvider={handleSelectProvider}
-            selectedProviderId={selectedProviderId}
-            latestBooking={latestBooking}
-            onViewBooking={() => setShowBookingModal(true)}
-          />
+      {online === false && (
+        <div className="offline-banner" role="alert">
+          Can’t reach the VoiceFix API. Start it with <code>npm run dev</code> from the project root.
         </div>
+      )}
 
-        <div className="right-pane">
-          <VoiceController
-            isRecording={isRecording}
-            isProcessing={isProcessing}
-            liveTranscript={liveTranscript}
-            onToggleRecord={handleToggleRecord}
-            onSendTextMessage={handleSendUserMessage}
-            analyserNode={analyserNode}
+      <main className="main">
+        {view === 'assistant' && <AssistantView assistant={assistant} settings={settings} updateSettings={updateSettings} onViewBooking={setPass} />}
+        {view === 'bookings' && (
+          <BookingsView customerId={settings.customerId} version={version} onChanged={bump} onView={setPass} onGoAssistant={() => go('assistant')} notify={notify} />
+        )}
+        {view === 'pros' && (
+          <ProvidersView
+            meta={meta}
+            customerId={settings.customerId}
+            defaultPincode={customer?.default_location?.pincode}
+            version={version}
+            notify={notify}
+            onBooked={b => {
+              bump();
+              notify(`Booked! ID ${b.booking_id}`, 'success');
+              setPass(b);
+            }}
           />
-        </div>
+        )}
       </main>
 
-      {/* Confirmed Booking Modal Pass */}
-      {showBookingModal && (
-        <BookingModal
-          booking={latestBooking}
-          onClose={() => setShowBookingModal(false)}
-        />
-      )}
-
-      {/* Settings Modal */}
-      {showSettingsModal && (
-        <SettingsModal
-          webhookUrl={webhookUrl}
-          onSaveWebhookUrl={handleSaveWebhookUrl}
-          onResetSession={handleResetSession}
-          onClose={() => setShowSettingsModal(false)}
-        />
-      )}
+      <BookingPass booking={pass} onClose={() => setPass(null)} />
+      <SettingsDrawer
+        open={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
+        settings={settings}
+        update={updateSettings}
+        customers={customers}
+        config={config}
+        onResetData={resetData}
+        onNewConversation={() => {
+          assistant.reset();
+          setSettingsOpen(false);
+          go('assistant');
+        }}
+      />
+      <Toasts toasts={toasts} dismiss={dismiss} />
     </div>
   );
 }
-
-export default App;

@@ -1,10 +1,8 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_MAKE_WEBHOOK_URL?: string;
-  readonly VITE_MOCK_API_URL?: string;
-  readonly VITE_ELEVENLABS_API_KEY?: string;
-  readonly VITE_ELEVENLABS_VOICE_ID?: string;
+  /** Optional absolute API origin when the frontend is hosted separately from the API. */
+  readonly VITE_API_URL?: string;
 }
 
 interface ImportMeta {

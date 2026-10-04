@@ -1,78 +1,58 @@
-# PS-06 Service Booking Voice Agent: Setup & Deployment Guide
+# Setup & Deployment
 
 ## Prerequisites
-- **Node.js**: v18.0.0 or later (v20+ recommended)
-- **npm**: v9.0.0 or later
-- **Docker & Docker Compose** (Optional, for containerized run)
+- Node.js 20+ and npm 9+
+- Optional: Docker, a Make.com account, an ElevenLabs API key
 
----
+## Local development
 
-## Quick Start (Local Development)
-
-### Step 1: Start the Mock REST API
 ```bash
-cd PS06-Service-Booking-Agent/mock-api
-npm install
-npm run dev
+npm run setup   # root + mock-api + frontend installs, copies .env.example → .env
+npm run dev     # API http://localhost:8000, app http://localhost:5173
 ```
-The API server starts on **http://localhost:8000**.
-Verify with:
+
+Vite proxies `/api` and `/health` to the API, so the browser only ever talks to one origin. To run the two halves separately, use `npm run dev:api` and `npm run dev:web`.
+
+Health check:
+
 ```bash
 curl http://localhost:8000/health
-# Expected: {"status":"ok","service":"PS06 Mock Service API","version":"1.0.0"}
 ```
 
-### Step 2: Start the Frontend
-In a new terminal window:
+## Voice
+
+| Capability | Without keys | With `ELEVENLABS_API_KEY` |
+| --- | --- | --- |
+| Speech → text | Browser SpeechRecognition (Chrome, Edge, Safari) with live captions | Also works in browsers without it (e.g. Firefox), via MediaRecorder → `/api/voice/stt` |
+| Text → speech | Browser speechSynthesis | Pick "ElevenLabs" under Settings → Voice output |
+
+The microphone needs a secure context: `localhost` or HTTPS.
+
+## Make.com mode
+
+1. Build the scenario from [make/README.md](../make/README.md). End it with a **Webhook response** module that returns JSON containing `text`, plus optionally `state`, `options` and `booking`.
+2. Put the webhook URL in `.env` as `MAKE_WEBHOOK_URL`, or paste it into Settings → Agent brain → Custom webhook URL. The pasted URL is called straight from the browser.
+3. Choose **Make.com AI Agent** in Settings.
+
+If the webhook errors, times out (30s) or returns no `text`, the built-in agent answers instead and the chat shows a notice.
+
+## Tests
+
 ```bash
-cd PS06-Service-Booking-Agent/frontend
-npm install
-npm run dev
-```
-The Vite development server will start on **http://localhost:5173**.
-
----
-
-## Environment Configuration
-
-Copy `.env.example` to `frontend/.env`:
-```env
-# URL of your Make.com scenario custom webhook
-VITE_MAKE_WEBHOOK_URL=https://hook.eu1.make.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-# URL of local/cloud mock REST API
-VITE_MOCK_API_URL=http://localhost:8000
-
-# Optional ElevenLabs integration for ultra-realistic voice
-VITE_ELEVENLABS_API_KEY=
-VITE_ELEVENLABS_VOICE_ID=21m00Tcm4TlvDq8ikWAM
-```
-
----
-
-## Running Automated Tests
-
-Run the full Vitest suite in `mock-api/`:
-```bash
-cd PS06-Service-Booking-Agent/mock-api
 npm test
 ```
-This tests:
-- Provider category and pincode searches
-- Slot availability updates
-- Dynamic booking ID generation
-- Double-booking prevention (`SLOT_UNAVAILABLE`)
-- Rescheduling & cancellation lifecycles
-- Full end-to-end conversation simulation matching the demo criteria
 
----
+The tests freeze the clock with `APP_FIXED_NOW`. They cover provider search and ranking, the rolling availability window, booking, double-booking (including concurrent requests), reschedule and cancel, the full demo conversation, and NLU parsing (dates, times, PIN codes, Hinglish).
 
-## Running with Docker Compose
+## Production
 
-To start both services in isolated Docker containers:
+### Render
+`render.yaml` builds both packages (`npm run build`) and starts Express (`npm start`), which serves the app and the API on one port. Set `MAKE_WEBHOOK_URL` and `ELEVENLABS_API_KEY` in the Render dashboard. On the free tier the disk is ephemeral, so bookings reset on each deploy.
+
+### Docker
+
 ```bash
-cd PS06-Service-Booking-Agent
-docker compose up -d
+docker compose up --build    # http://localhost:8000
 ```
-- Mock API: `http://localhost:8000`
-- Frontend: `http://localhost:5173`
+
+Bookings persist in the `voicefix-state` volume.
