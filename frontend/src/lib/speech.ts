@@ -154,7 +154,7 @@ export async function startBrowserListening(lang: string, cb: ListenCallbacks): 
     rec.start();
   } catch (err) {
     cleanup();
-    throw new Error(micErrorMessage(err));
+    throw new Error(micErrorMessage(err), { cause: err });
   }
 
   return {
@@ -173,7 +173,7 @@ export async function startRecorderListening(lang: string, cb: ListenCallbacks):
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
   } catch (err) {
-    throw new Error(micErrorMessage(err));
+    throw new Error(micErrorMessage(err), { cause: err });
   }
 
   const MR = (window as any).MediaRecorder;
@@ -248,7 +248,7 @@ export function cleanForSpeech(text: string): string {
     .replace(/₹\s?(\d[\d,]*)/g, '$1 rupees')
     .replace(/\b([A-Z]{2})(\d{4})\b/g, (_, letters: string, digits: string) => `${letters.split('').join(' ')} ${digits.split('').join(' ')}`)
     .replace(/(\d)\s*[–-]\s*(\d)/g, '$1 to $2')
-    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '')
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]|\u{FE0F}/gu, '')
     .replace(/\s+/g, ' ')
     .trim();
 }

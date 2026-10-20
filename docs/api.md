@@ -357,3 +357,4 @@ ElevenLabs proxy. STT takes raw audio (`Content-Type: audio/webm|mp4|ogg`) and r
 - `POST /api/bookings` accepts only slots on the provider's schedule. The price always comes from the provider record, so a client-supplied `price` is ignored.
 - A taken slot returns `409 SLOT_UNAVAILABLE` together with up to 3 `alternatives`.
 - Text parameters (query strings and JSON fields such as `provider_id`, `date`, `start_time`, `pincode`) must be strings. A repeated query parameter or a non-string JSON value returns `400 INVALID_PARAMETERS`.
+- `/api/agent/*`, `/api/make-simulator` and `/api/voice/*` share a per-IP limit of `RATE_LIMIT_PER_MINUTE` requests per minute (default 30, `0` disables it). Over the limit they return `429 RATE_LIMITED` with a `Retry-After` header.

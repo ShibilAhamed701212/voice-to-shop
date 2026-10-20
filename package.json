@@ -12,7 +12,8 @@
     "build": "npm --prefix frontend install --include=dev && npm --prefix frontend run build && npm --prefix mock-api install --include=dev && npm --prefix mock-api run build",
     "start": "node mock-api/dist/server.js",
     "test": "npm --prefix mock-api test",
-    "typecheck": "npm --prefix mock-api run typecheck && npm --prefix frontend run typecheck"
+    "typecheck": "npm --prefix mock-api run typecheck && npm --prefix frontend run typecheck",
+    "lint": "npm --prefix mock-api run lint && npm --prefix frontend run lint"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

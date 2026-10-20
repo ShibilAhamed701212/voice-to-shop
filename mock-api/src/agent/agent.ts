@@ -95,6 +95,8 @@ interface Customer {
 }
 
 const SESSION_TTL_MS = 6 * 60 * 60 * 1000;
+/** Oldest sessions are dropped beyond this, so random session ids can't grow memory without bound. */
+const MAX_SESSIONS = 1000;
 const PAGE_SIZE = 3;
 const sessions = new Map<string, Session>();
 
@@ -149,6 +151,10 @@ function getSession(id: string, customerId: string): Session {
   }
   s.customer_id = customerId || s.customer_id;
   s.updatedAt = Date.now();
+  // Re-insert so the Map stays in least-recently-used order, then drop the oldest beyond the cap.
+  sessions.delete(id);
+  sessions.set(id, s);
+  if (sessions.size > MAX_SESSIONS) sessions.delete(sessions.keys().next().value as string);
   return s;
 }
 

@@ -19,6 +19,8 @@ import type { AgentAction, AgentResponse, AgentState, Proposal, ProviderOption, 
 export const CLAUDE_MODEL = process.env.CLAUDE_MODEL || 'claude-opus-5-5';
 const MAX_TOOL_ROUNDS = 6;
 const SESSION_TTL_MS = 6 * 60 * 60 * 1000;
+/** Oldest sessions are dropped beyond this, so random session ids can't grow memory without bound. */
+const MAX_SESSIONS = 1000;
 
 type Message = Anthropic.Beta.BetaMessageParam;
 
@@ -193,6 +195,10 @@ function getSession(id: string, customerId: string): ClaudeSession {
     sessions.set(id, sess);
   }
   sess.updatedAt = Date.now();
+  // Re-insert so the Map stays in least-recently-used order, then drop the oldest beyond the cap.
+  sessions.delete(id);
+  sessions.set(id, sess);
+  if (sessions.size > MAX_SESSIONS) sessions.delete(sessions.keys().next().value as string);
   return sess;
 }
 
@@ -458,7 +464,7 @@ export async function handleClaudeMessage(input: {
   sess.messages.push({ role: 'user', content: [{ type: 'text', text: `${contextNote(sess)}\n\n${text}` }] });
 
   const fx: TurnEffects = {};
-  let reply = '';
+  let reply: string;
   try {
     reply = await runLoop(sess, fx);
   } catch (err) {
