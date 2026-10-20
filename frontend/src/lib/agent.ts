@@ -79,16 +79,25 @@ export async function sendTurn(p: TurnParams): Promise<AgentReply> {
       );
       return normaliseReply(raw, p.sessionId, 'make');
     } catch (err: any) {
-      const reply = await local('local');
-      return { ...reply, fallback: true, notice: `Your Make.com webhook failed (${err.message}). The built-in agent answered instead.` };
+      try {
+        const reply = await local('local');
+        return { ...reply, fallback: true, notice: `Your Make.com webhook failed (${err.message}). The built-in agent answered instead.` };
+      } catch (fallbackErr) {
+        throw friendlyError(fallbackErr);
+      }
     }
   }
 
   try {
     return await local(p.mode);
-  } catch (err: any) {
-    if (err.message === 'network error') throw new Error("Can't reach the VoiceFix server. Make sure the API is running.", { cause: err });
-    if (err.message === 'HTTP 429') throw new Error("You're sending messages too quickly. Please wait a moment and try again.", { cause: err });
-    throw new Error(`The agent request failed (${err.message}).`, { cause: err });
+  } catch (err) {
+    throw friendlyError(err);
   }
+}
+
+/** Turns a failed request to the VoiceFix API into a message the chat can show. */
+function friendlyError(err: any): Error {
+  if (err?.message === 'network error') return new Error("Can't reach the VoiceFix server. Make sure the API is running.", { cause: err });
+  if (err?.message === 'HTTP 429') return new Error("You're sending messages too quickly. Please wait a moment and try again.", { cause: err });
+  return new Error(`The agent request failed (${err?.message}).`, { cause: err });
 }

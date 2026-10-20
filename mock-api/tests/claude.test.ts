@@ -3,7 +3,7 @@ import type Anthropic from '@anthropic-ai/sdk';
 import request from 'supertest';
 import app from '../src/server.js';
 import { resetStore } from '../src/services/bookingStore.js';
-import { resetClaudeSessions, setClaudeClient } from '../src/agent/claudeAgent.js';
+import { resetClaudeSessions, setClaudeClient, trimHistory } from '../src/agent/claudeAgent.js';
 
 type Block = { type: 'text'; text: string } | { type: 'tool_use'; id: string; name: string; input: Record<string, unknown> };
 
@@ -96,5 +96,27 @@ describe('Claude agent (mocked API)', () => {
     expect(r.body.fallback).toBe(true);
     expect(r.body.source).toBe('local');
     expect(r.body.text).toContain('PIN code');
+  });
+});
+
+describe('Claude history trimming', () => {
+  it('keeps long histories bounded and always starts on a user text turn', () => {
+    const messages: any[] = [];
+    for (let t = 0; t < 30; t++) {
+      messages.push({ role: 'user', content: [{ type: 'text', text: `turn ${t}` }] });
+      messages.push({ role: 'assistant', content: [{ type: 'tool_use', id: `t${t}`, name: 'x', input: {} }] });
+      messages.push({ role: 'user', content: [{ type: 'tool_result', tool_use_id: `t${t}`, content: '{}' }] });
+      messages.push({ role: 'assistant', content: [{ type: 'text', text: 'ok' }] });
+    }
+    const sess = { messages };
+    trimHistory(sess);
+    expect(sess.messages.length).toBeLessThanOrEqual(40);
+    expect(sess.messages[0].role).toBe('user');
+    expect(sess.messages[0].content[0].type).toBe('text');
+    expect(sess.messages.at(-1).content[0].text).toBe('ok');
+
+    const short = { messages: messages.slice(0, 8) };
+    trimHistory(short);
+    expect(short.messages).toHaveLength(8);
   });
 });

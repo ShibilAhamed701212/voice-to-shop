@@ -222,8 +222,12 @@ export async function startRecorderListening(lang: string, cb: ListenCallbacks):
       if (!res.ok || !data.success) throw new Error(data.error || `HTTP ${res.status}`);
       if (data.text) cb.onFinal(data.text);
       else cb.onError(micErrorMessage({ error: 'no-speech' }));
-    } catch {
-      cb.onError('Transcription failed. Please try again or type your message.');
+    } catch (err) {
+      cb.onError(
+        err instanceof Error && err.message === 'RATE_LIMITED'
+          ? "You're talking to the server too quickly. Please wait a moment and try again."
+          : 'Transcription failed. Please try again or type your message.'
+      );
     }
     cb.onEnd();
   };
