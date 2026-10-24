@@ -19,6 +19,11 @@ import type { AgentAction, AgentResponse, AgentState, Proposal, ProviderOption, 
 export const CLAUDE_MODEL = process.env.CLAUDE_MODEL || 'claude-opus-5-5';
 const MAX_TOOL_ROUNDS = 6;
 const SESSION_TTL_MS = 6 * 60 * 60 * 1000;
+/** Oldest sessions are dropped beyond this, so random session ids can't grow memory without bound. */
+const MAX_SESSIONS = 1000;
+/** Long conversations keep only their most recent turns, so prompt size and memory stay bounded. */
+const MAX_HISTORY_MESSAGES = 60;
+const KEEP_HISTORY_MESSAGES = 40;
 
 type Message = Anthropic.Beta.BetaMessageParam;
 
@@ -193,6 +198,10 @@ function getSession(id: string, customerId: string): ClaudeSession {
     sessions.set(id, sess);
   }
   sess.updatedAt = Date.now();
+  // Re-insert so the Map stays in least-recently-used order, then drop the oldest beyond the cap.
+  sessions.delete(id);
+  sessions.set(id, sess);
+  if (sessions.size > MAX_SESSIONS) sessions.delete(sessions.keys().next().value as string);
   return sess;
 }
 
@@ -439,6 +448,19 @@ async function runLoop(sess: ClaudeSession, fx: TurnEffects): Promise<string> {
   return '';
 }
 
+/** Drops the oldest turns once history is long, cutting only where a user's own text turn begins. */
+export function trimHistory(sess: { messages: Message[] }): void {
+  if (sess.messages.length <= MAX_HISTORY_MESSAGES) return;
+  for (let i = sess.messages.length - KEEP_HISTORY_MESSAGES; i < sess.messages.length; i++) {
+    const m = sess.messages[i];
+    const startsUserTurn = m.role === 'user' && Array.isArray(m.content) && m.content.every(b => b.type === 'text');
+    if (startsUserTurn) {
+      sess.messages.splice(0, i);
+      return;
+    }
+  }
+}
+
 export async function handleClaudeMessage(input: {
   session_id?: string;
   customer_id?: string;
@@ -453,12 +475,13 @@ export async function handleClaudeMessage(input: {
 
   sess.turn += 1;
   const text = actionText(input.action, (input.message || '').trim()) || 'Hi';
-  // History is append-only so the prompt cache and thinking blocks stay valid.
+  trimHistory(sess);
+  // History is otherwise append-only so the prompt cache and thinking blocks stay valid.
   const historyLength = sess.messages.length;
   sess.messages.push({ role: 'user', content: [{ type: 'text', text: `${contextNote(sess)}\n\n${text}` }] });
 
   const fx: TurnEffects = {};
-  let reply = '';
+  let reply: string;
   try {
     reply = await runLoop(sess, fx);
   } catch (err) {

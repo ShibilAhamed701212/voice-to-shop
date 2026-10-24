@@ -73,14 +73,17 @@ Then try "reschedule it to Wednesday morning", "cancel my booking" or "what are 
 | `DATA_DIR` | Where runtime bookings are stored. Default `mock-api/data/runtime/`. |
 | `ALLOW_RESET` | Allows `POST /api/admin/reset` in production. |
 | `CORS_ORIGIN` | Comma-separated list of allowed origins. Default `*`. |
+| `RATE_LIMIT_PER_MINUTE` | Requests per minute per IP for the agent and voice endpoints, which can call paid APIs. Default `30`; `0` turns it off. |
+| `TRUST_PROXY` | Set to `1` behind a reverse proxy (Render does this in `render.yaml`) so the rate limit sees the real client IP. |
 
 ## Scripts
 
 | Command | What it does |
 | --- | --- |
 | `npm run dev` | API (tsx watch) + Vite dev server with an `/api` proxy |
-| `npm test` | 58 tests: API, booking concurrency, input validation, offline agent, Claude agent (mocked) and language parsing. Needs Node 22.12+ |
+| `npm test` | 60 tests: API, booking concurrency, input validation, rate limiting, offline agent, Claude agent (mocked) and language parsing. Needs Node 22.12+ |
 | `npm run typecheck` | TypeScript checks for both packages |
+| `npm run lint` | ESLint for both packages |
 | `npm run build && npm start` | Production build; Express serves the app and API on :8000 |
 | `docker compose up --build` | Same thing in a single container on :8000 |
 
@@ -100,7 +103,7 @@ Reply {text, stage, state, options, proposal, booking, suggestions}
    ─► React cards + text-to-speech
 ```
 
-GitHub Actions (`.github/workflows/ci.yml`) runs the typecheck and build on Node 20 and 22, and the tests on Node 22, for every push to `main` and every pull request.
+GitHub Actions (`.github/workflows/ci.yml`) runs the typecheck, lint and build on Node 20 and 22, and the tests on Node 22, for every push to `main` and every pull request.
 
 ## Fixes from the October 2026 audit
 
@@ -110,10 +113,17 @@ GitHub Actions (`.github/workflows/ci.yml`) runs the typecheck and build on Node
 - `render.yaml` now declares `ANTHROPIC_API_KEY`, so the Claude agent can be configured from the Render dashboard.
 - Added CI, and documented the PATCH and slot-blocking endpoints in [docs/api.md](docs/api.md).
 
+Second pass:
+
+- The agent and voice endpoints call paid APIs (Claude, ElevenLabs, Make) and had no rate limit. They are now limited per IP (`RATE_LIMIT_PER_MINUTE`, default 30) and return `429 RATE_LIMITED`.
+- Both agents kept every session id in memory for 6 hours, so a client sending random session ids could grow memory without bound. Each agent now keeps at most 1,000 sessions and drops the least recently used.
+- Fixed npm audit advisories in dev-only dependencies (`shell-quote` via `concurrently`, `source-map-js` via Vite).
+- Added ESLint to both packages and to CI.
+
 ## Limitations
 
 - **Demo data, not a real marketplace.** There are 44 fictional providers in 8 Bengaluru PIN codes, with hourly slots and flat visit prices. There are no payments, SMS or email notifications, and no real provider app.
-- **No authentication.** The customer is chosen from demo profiles in Settings. Anyone who can open the app can view, cancel or reset bookings. CORS is open unless `CORS_ORIGIN` is set, and there is no rate limiting. Harden all of this before any real deployment.
+- **No authentication.** The customer is chosen from demo profiles in Settings. Anyone who can open the app can view, cancel or reset bookings. CORS is open unless `CORS_ORIGIN` is set. Only the agent and voice endpoints are rate limited, in memory per server instance. Harden all of this before any real deployment.
 - **Simple storage.** Bookings live in one JSON file served by a single Node process. The no-double-booking guarantee holds for one server instance only; multiple instances would need a real database with transactions. Render's free tier has an ephemeral disk, so bookings reset on each deploy.
 - **The offline agent is rule-based.** It covers common booking phrasing in English and Hinglish but can misread unusual sentences. It always replies in English, even when it understands Hindi or Kannada input.
 - **The Claude agent needs an API key and costs money per conversation.** Its conversation history lives in server memory and is lost on restart. It has been tested with a simulated API in the automated tests; verify it against the live API once your key is in place.

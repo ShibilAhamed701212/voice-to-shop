@@ -50,8 +50,8 @@ async function postJson(url: string, body: unknown, timeoutMs: number): Promise<
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return textBody;
   } catch (err: any) {
-    if (err?.name === 'AbortError') throw new Error('timed out');
-    if (err instanceof TypeError) throw new Error('network error');
+    if (err?.name === 'AbortError') throw new Error('timed out', { cause: err });
+    if (err instanceof TypeError) throw new Error('network error', { cause: err });
     throw err;
   } finally {
     clearTimeout(timer);
@@ -79,14 +79,25 @@ export async function sendTurn(p: TurnParams): Promise<AgentReply> {
       );
       return normaliseReply(raw, p.sessionId, 'make');
     } catch (err: any) {
-      const reply = await local('local');
-      return { ...reply, fallback: true, notice: `Your Make.com webhook failed (${err.message}). The built-in agent answered instead.` };
+      try {
+        const reply = await local('local');
+        return { ...reply, fallback: true, notice: `Your Make.com webhook failed (${err.message}). The built-in agent answered instead.` };
+      } catch (fallbackErr) {
+        throw friendlyError(fallbackErr);
+      }
     }
   }
 
   try {
     return await local(p.mode);
-  } catch (err: any) {
-    throw new Error(err.message === 'network error' ? "Can't reach the VoiceFix server. Make sure the API is running." : `The agent request failed (${err.message}).`);
+  } catch (err) {
+    throw friendlyError(err);
   }
+}
+
+/** Turns a failed request to the VoiceFix API into a message the chat can show. */
+function friendlyError(err: any): Error {
+  if (err?.message === 'network error') return new Error("Can't reach the VoiceFix server. Make sure the API is running.", { cause: err });
+  if (err?.message === 'HTTP 429') return new Error("You're sending messages too quickly. Please wait a moment and try again.", { cause: err });
+  return new Error(`The agent request failed (${err?.message}).`, { cause: err });
 }

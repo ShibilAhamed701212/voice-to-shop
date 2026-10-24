@@ -154,7 +154,7 @@ export async function startBrowserListening(lang: string, cb: ListenCallbacks): 
     rec.start();
   } catch (err) {
     cleanup();
-    throw new Error(micErrorMessage(err));
+    throw new Error(micErrorMessage(err), { cause: err });
   }
 
   return {
@@ -173,7 +173,7 @@ export async function startRecorderListening(lang: string, cb: ListenCallbacks):
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
   } catch (err) {
-    throw new Error(micErrorMessage(err));
+    throw new Error(micErrorMessage(err), { cause: err });
   }
 
   const MR = (window as any).MediaRecorder;
@@ -222,8 +222,12 @@ export async function startRecorderListening(lang: string, cb: ListenCallbacks):
       if (!res.ok || !data.success) throw new Error(data.error || `HTTP ${res.status}`);
       if (data.text) cb.onFinal(data.text);
       else cb.onError(micErrorMessage({ error: 'no-speech' }));
-    } catch {
-      cb.onError('Transcription failed. Please try again or type your message.');
+    } catch (err) {
+      cb.onError(
+        err instanceof Error && err.message === 'RATE_LIMITED'
+          ? "You're talking to the server too quickly. Please wait a moment and try again."
+          : 'Transcription failed. Please try again or type your message.'
+      );
     }
     cb.onEnd();
   };
@@ -248,7 +252,7 @@ export function cleanForSpeech(text: string): string {
     .replace(/₹\s?(\d[\d,]*)/g, '$1 rupees')
     .replace(/\b([A-Z]{2})(\d{4})\b/g, (_, letters: string, digits: string) => `${letters.split('').join(' ')} ${digits.split('').join(' ')}`)
     .replace(/(\d)\s*[–-]\s*(\d)/g, '$1 to $2')
-    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '')
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]|\u{FE0F}/gu, '')
     .replace(/\s+/g, ' ')
     .trim();
 }

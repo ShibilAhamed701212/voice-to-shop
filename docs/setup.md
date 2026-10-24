@@ -40,9 +40,10 @@ If the webhook errors, times out (30s) or returns no `text`, the built-in agent 
 
 ```bash
 npm test
+npm run lint   # ESLint for both packages
 ```
 
-The tests need Node 22.12 or newer (Vitest 5); the app itself runs on Node 20. They freeze the clock with `APP_FIXED_NOW`. They cover provider search and ranking, the rolling availability window, booking, double-booking (including concurrent requests), reschedule and cancel, PATCH and input validation, the full demo conversation, and NLU parsing (dates, times, PIN codes, Hinglish).
+The tests need Node 22.12 or newer (Vitest 5); the app and `npm run lint` need Node 20.19 or newer. They freeze the clock with `APP_FIXED_NOW`. They cover provider search and ranking, the rolling availability window, booking, double-booking (including concurrent requests), reschedule and cancel, PATCH and input validation, the full demo conversation, and NLU parsing (dates, times, PIN codes, Hinglish).
 
 ## Production
 

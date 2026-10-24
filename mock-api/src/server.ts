@@ -15,6 +15,7 @@ import customersRouter from './routes/customers.js';
 import agentRouter from './routes/agent.js';
 import configRouter from './routes/config.js';
 import voiceRouter from './routes/voice.js';
+import { perMinuteLimit, rateLimit } from './lib/rateLimit.js';
 
 const app = express();
 // `--port 8000` (used by `npm run dev`) wins over PORT so a parent process's PORT can't hijack the API.
@@ -22,6 +23,11 @@ const portFlag = process.argv.indexOf('--port');
 const PORT = Number(portFlag > -1 ? process.argv[portFlag + 1] : process.env.PORT) || 8000;
 
 app.disable('x-powered-by');
+// Behind a reverse proxy (Render, a load balancer) set TRUST_PROXY=1 so rate limits see the real client IP.
+if (process.env.TRUST_PROXY) {
+  const hops = Number(process.env.TRUST_PROXY);
+  app.set('trust proxy', Number.isFinite(hops) ? hops : process.env.TRUST_PROXY);
+}
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN?.split(',') || '*',
@@ -43,6 +49,9 @@ if (process.env.NODE_ENV !== 'test') {
 app.use('/', healthRouter);
 app.use('/api', healthRouter);
 app.use('/api', configRouter);
+// Agent and voice turns can call paid APIs (Claude, ElevenLabs, Make), so they are rate limited per IP.
+const paidApiLimit = rateLimit({ windowMs: 60_000, max: perMinuteLimit });
+app.use(['/api/agent', '/api/make-simulator', '/api/voice'], paidApiLimit);
 app.use('/api', agentRouter);
 app.use('/api/providers', providersRouter);
 app.use('/api/bookings', bookingsRouter);

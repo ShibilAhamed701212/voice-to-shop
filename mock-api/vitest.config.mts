@@ -7,7 +7,8 @@ export default defineConfig({
       // Freeze "now" to the morning the seed data was authored for (IST).
       APP_FIXED_NOW: '2026-09-20T09:00:00+05:30',
       MAKE_WEBHOOK_URL: '',
-      ELEVENLABS_API_KEY: ''
+      ELEVENLABS_API_KEY: '',
+      RATE_LIMIT_PER_MINUTE: '0'
     },
     fileParallelism: false
   }

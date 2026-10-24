@@ -28,6 +28,8 @@ jobs:
       - run: npm --prefix frontend ci
       - name: Typecheck
         run: npm --prefix mock-api run typecheck && npm --prefix frontend run typecheck
+      - name: Lint
+        run: npm --prefix mock-api run lint && npm --prefix frontend run lint
       - name: Test
         if: matrix.node != 20
         run: npm --prefix mock-api test
